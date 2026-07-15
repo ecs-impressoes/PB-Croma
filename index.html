@@ -3,1100 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PB-CROMA PRO - Editor de Fotos 27x19cm | Corte 26x18cm</title>
-    <meta name="description" content="Editor profissional de fotos para impressão com sangria 27x19cm e linha de corte 26x18cm. Upload de até 200 fotos. Suporte HEIC, JPG, PNG, WEBP.">
-    <meta name="keywords" content="editor de fotos, impressão 27x19cm, linha de corte 26x18cm, sangria, HEIC, upload 200 fotos">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://pibbaweb1.github.io/pb-croma-pro/">
-    
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="PB-CROMA PRO - Editor de Fotos 27x19cm | Corte 26x18cm">
-    <meta property="og:description" content="Editor profissional de fotos com sangria 27x19cm e linha de corte 26x18cm. Upload de até 200 fotos.">
-    
+    <title>PB-CROMA PRO - Editor de Fotos 28x19cm | Corte 27x18cm</title>
+    <meta name="description" content="Editor profissional de fotos para impressão com sangria 28x19cm e linha de corte 27x18cm. Upload de até 200 fotos. Suporte HEIC, JPG, PNG, WEBP.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background: linear-gradient(135deg, #0f172a, #1e293b);
-            color: #e2e8f0;
-            min-height: 100vh;
-        }
-
-        .container {
-            max-width: 1600px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 30px;
-            background: rgba(30, 41, 59, 0.8);
-            backdrop-filter: blur(10px);
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .logo {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #3a0ca3, #4361ee, #4cc9f0);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            font-weight: bold;
-            color: white;
-            box-shadow: 0 4px 10px rgba(58, 12, 163, 0.4);
-            flex-shrink: 0;
-        }
-
-        .logo-text h1 {
-            font-size: 2rem;
-            background: linear-gradient(to right, #4cc9f0, #4361ee);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .logo-text p {
-            font-size: 0.85rem;
-            color: #94a3b8;
-        }
-
-        .header-info {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .header-info .badge {
-            background: rgba(76, 201, 240, 0.15);
-            border: 1px solid rgba(76, 201, 240, 0.3);
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            color: #4cc9f0;
-            white-space: nowrap;
-        }
-
-        .header-info .badge.cut {
-            border-color: rgba(239, 68, 68, 0.3);
-            color: #f87171;
-        }
-
-        .main-grid {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 30px;
-        }
-
-        @media (max-width: 1024px) {
-            .main-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .card {
-            background: rgba(30, 41, 59, 0.7);
-            backdrop-filter: blur(10px);
-            padding: 25px;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .card h2 {
-            color: #4cc9f0;
-            margin-bottom: 15px;
-            font-size: 1.2rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .upload-area {
-            border: 2px dashed #475569;
-            border-radius: 12px;
-            padding: 30px 20px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background: rgba(15, 23, 42, 0.5);
-            margin-bottom: 15px;
-        }
-
-        .upload-area:hover {
-            border-color: #4cc9f0;
-            background: rgba(76, 201, 240, 0.05);
-        }
-
-        .upload-area.drag-over {
-            border-color: #4cc9f0;
-            background: rgba(76, 201, 240, 0.1);
-        }
-
-        .upload-area i {
-            font-size: 36px;
-            color: #4cc9f0;
-            margin-bottom: 10px;
-        }
-
-        .upload-area p {
-            color: #94a3b8;
-            margin-bottom: 8px;
-            font-size: 0.95rem;
-        }
-
-        .upload-area .formats {
-            font-size: 0.75rem;
-            color: #64748b;
-            margin-top: 8px;
-        }
-
-        .upload-area .formats span {
-            display: inline-block;
-            background: rgba(76, 201, 240, 0.1);
-            padding: 2px 8px;
-            border-radius: 12px;
-            margin: 2px;
-            font-size: 0.7rem;
-            border: 1px solid rgba(76, 201, 240, 0.15);
-        }
-
-        .upload-area .formats span.heic {
-            background: rgba(239, 68, 68, 0.15);
-            border-color: rgba(239, 68, 68, 0.3);
-            color: #f87171;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 8px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: center;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #3a0ca3, #4361ee);
-            color: white;
-            box-shadow: 0 4px 10px rgba(58, 12, 163, 0.3);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(58, 12, 163, 0.4);
-        }
-
-        .btn-success {
-            background: linear-gradient(135deg, #10b981, #059669);
-            color: white;
-        }
-
-        .btn-success:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(16, 185, 129, 0.4);
-        }
-
-        .btn-danger {
-            background: linear-gradient(135deg, #ef4444, #dc2626);
-            color: white;
-        }
-
-        .btn-danger:hover {
-            transform: translateY(-2px);
-        }
-
-        .btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none !important;
-        }
-
-        .btn .spinner {
-            display: inline-block;
-            width: 16px;
-            height: 16px;
-            border: 2px solid rgba(255,255,255,0.3);
-            border-radius: 50%;
-            border-top-color: #fff;
-            animation: spin 0.8s ease-in-out infinite;
-            margin-right: 6px;
-            vertical-align: middle;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        .hidden {
-            display: none !important;
-        }
-
-        .photo-counter {
-            background: linear-gradient(135deg, #3a0ca3, #4361ee);
-            color: white;
-            padding: 3px 10px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            margin-left: 8px;
-        }
-
-        .photo-list {
-            max-height: 200px;
-            overflow-y: auto;
-            margin: 10px 0;
-        }
-
-        .photo-list::-webkit-scrollbar {
-            width: 5px;
-        }
-
-        .photo-list::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 3px;
-        }
-
-        .photo-list::-webkit-scrollbar-thumb {
-            background: #4cc9f0;
-            border-radius: 3px;
-        }
-
-        .photo-item {
-            display: flex;
-            align-items: center;
-            padding: 8px;
-            border-bottom: 1px solid #334155;
-            gap: 10px;
-        }
-
-        .photo-item:last-child {
-            border-bottom: none;
-        }
-
-        .photo-thumb {
-            width: 40px;
-            height: 40px;
-            object-fit: cover;
-            border-radius: 6px;
-            flex-shrink: 0;
-            background: #1a1a2e;
-        }
-
-        .photo-info {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .photo-name {
-            font-weight: 600;
-            font-size: 0.8rem;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .photo-name .format-tag {
-            font-size: 0.6rem;
-            padding: 1px 6px;
-            border-radius: 8px;
-            margin-left: 4px;
-            font-weight: 400;
-        }
-
-        .photo-name .format-tag.heic {
-            background: #ef4444;
-            color: white;
-        }
-        .photo-name .format-tag.jpg {
-            background: #3b82f6;
-            color: white;
-        }
-        .photo-name .format-tag.png {
-            background: #8b5cf6;
-            color: white;
-        }
-        .photo-name .format-tag.webp {
-            background: #06b6d4;
-            color: white;
-        }
-
-        .photo-size {
-            font-size: 0.7rem;
-            color: #94a3b8;
-        }
-
-        .photo-actions {
-            display: flex;
-            gap: 5px;
-            flex-shrink: 0;
-        }
-
-        .photo-actions button {
-            background: rgba(30, 41, 59, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #94a3b8;
-            padding: 4px 8px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 0.7rem;
-        }
-
-        .photo-actions button:hover {
-            color: #4cc9f0;
-            border-color: #4cc9f0;
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 4px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 2px;
-            margin: 8px 0;
-            overflow: hidden;
-            display: none;
-        }
-
-        .progress-bar .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #3a0ca3, #4cc9f0);
-            width: 0%;
-            transition: width 0.3s ease;
-            border-radius: 2px;
-        }
-
-        .progress-bar.active {
-            display: block;
-        }
-
-        .preview-container {
-            position: relative;
-        }
-
-        .preview-toolbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-
-        .preview-toolbar .page-controls {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-        }
-
-        .preview-toolbar .page-controls button {
-            padding: 6px 14px;
-            background: rgba(30, 41, 59, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #e2e8f0;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .preview-toolbar .page-controls button:hover:not(:disabled) {
-            background: rgba(76, 201, 240, 0.15);
-            border-color: #4cc9f0;
-        }
-
-        .preview-toolbar .page-controls button:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-        }
-
-        .preview-toolbar .page-controls span {
-            padding: 0 8px;
-            color: #94a3b8;
-            font-size: 0.9rem;
-        }
-
-        .a4-page-container {
-            background: #1a1a2e;
-            padding: 20px;
-            border-radius: 12px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 500px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .a4-page {
-            background: white;
-            width: 100%;
-            max-width: 500px;
-            aspect-ratio: 1 / 1.414;
-            position: relative;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-            border-radius: 4px;
-            overflow: hidden;
-        }
-
-        .a4-page .page-label {
-            position: absolute;
-            top: 8px;
-            right: 12px;
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 3px 10px;
-            border-radius: 4px;
-            font-size: 0.7rem;
-            z-index: 10;
-        }
-
-        .photo-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            grid-template-rows: 1fr;
-            width: 100%;
-            height: 100%;
-            padding: 5px;
-        }
-
-        .photo-slot {
-            position: relative;
-            background: #f1f5f9;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            width: 100%;
-            height: 100%;
-            border-radius: 2px;
-        }
-
-        .photo-slot img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-
-        .photo-slot .photo-placeholder {
-            color: #94a3b8;
-            font-size: 1rem;
-            text-align: center;
-            padding: 20px;
-        }
-
-        .photo-slot .photo-placeholder i {
-            font-size: 2.5rem;
-            color: #cbd5e1;
-            display: block;
-            margin-bottom: 8px;
-        }
-
-        .photo-slot .photo-placeholder p {
-            font-size: 0.7rem;
-            color: #94a3b8;
-            margin-top: 5px;
-        }
-
-        /* ===== MARCAS DE CORTE - COM SANGRA ===== */
-        .cut-marks {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 5;
-        }
-
-        .cut-marks .corner {
-            position: absolute;
-            width: 14px;
-            height: 14px;
-        }
-
-        .cut-marks .corner::before,
-        .cut-marks .corner::after {
-            content: '';
-            position: absolute;
-            background: #000;
-        }
-
-        .cut-marks .corner.tl {
-            top: 4px;
-            left: 4px;
-        }
-        .cut-marks .corner.tl::before {
-            width: 14px;
-            height: 2px;
-            top: 0;
-            left: 0;
-        }
-        .cut-marks .corner.tl::after {
-            width: 2px;
-            height: 14px;
-            top: 0;
-            left: 0;
-        }
-
-        .cut-marks .corner.tr {
-            top: 4px;
-            right: 4px;
-        }
-        .cut-marks .corner.tr::before {
-            width: 14px;
-            height: 2px;
-            top: 0;
-            right: 0;
-        }
-        .cut-marks .corner.tr::after {
-            width: 2px;
-            height: 14px;
-            top: 0;
-            right: 0;
-        }
-
-        .cut-marks .corner.bl {
-            bottom: 4px;
-            left: 4px;
-        }
-        .cut-marks .corner.bl::before {
-            width: 14px;
-            height: 2px;
-            bottom: 0;
-            left: 0;
-        }
-        .cut-marks .corner.bl::after {
-            width: 2px;
-            height: 14px;
-            bottom: 0;
-            left: 0;
-        }
-
-        .cut-marks .corner.br {
-            bottom: 4px;
-            right: 4px;
-        }
-        .cut-marks .corner.br::before {
-            width: 14px;
-            height: 2px;
-            bottom: 0;
-            right: 0;
-        }
-        .cut-marks .corner.br::after {
-            width: 2px;
-            height: 14px;
-            bottom: 0;
-            right: 0;
-        }
-
-        /* Linha de CORTE (26x18cm) - Vermelha para destacar */
-        .cut-marks .cut-line {
-            position: absolute;
-            border: 1px solid #ef4444;
-            top: 5%;
-            left: 7%;
-            right: 7%;
-            bottom: 5%;
-            pointer-events: none;
-            opacity: 0.7;
-        }
-
-        /* Linha de SANGRA (27x19cm) - Cinza pontilhada */
-        .cut-marks .bleed {
-            position: absolute;
-            border: 1px dashed rgba(128, 128, 128, 0.5);
-            top: 3mm;
-            left: 3mm;
-            right: 3mm;
-            bottom: 3mm;
-            pointer-events: none;
-        }
-
-        .status-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 12px;
-            padding: 12px 15px;
-            background: rgba(15, 23, 42, 0.5);
-            border-radius: 8px;
-        }
-
-        .status-bar .info {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        .status-bar .info span {
-            color: #94a3b8;
-            font-size: 0.8rem;
-        }
-
-        .status-bar .info strong {
-            color: #e2e8f0;
-        }
-
-        .status-bar .info .cut-info {
-            color: #f87171;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 8px;
-            margin: 10px 0;
-        }
-
-        .stat-item {
-            background: rgba(15, 23, 42, 0.5);
-            padding: 8px;
-            border-radius: 6px;
-            text-align: center;
-        }
-
-        .stat-item .stat-value {
-            font-size: 1rem;
-            font-weight: bold;
-            color: #4cc9f0;
-        }
-
-        .stat-item .stat-label {
-            font-size: 0.65rem;
-            color: #94a3b8;
-        }
-
-        @media (max-width: 600px) {
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        .toast {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            padding: 12px 20px;
-            border-radius: 10px;
-            color: white;
-            font-weight: 500;
-            transform: translateY(100px);
-            opacity: 0;
-            transition: all 0.3s ease;
-            z-index: 1000;
-            max-width: 350px;
-            font-size: 0.9rem;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-        }
-
-        .toast.show {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        .toast.success {
-            background: linear-gradient(135deg, #10b981, #059669);
-        }
-        .toast.error {
-            background: linear-gradient(135deg, #ef4444, #dc2626);
-        }
-        .toast.info {
-            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-        }
-        .toast.warning {
-            background: linear-gradient(135deg, #f59e0b, #d97706);
-        }
-
-        .heic-warning {
-            background: rgba(239, 68, 68, 0.1);
-            border: 1px solid rgba(239, 68, 68, 0.2);
-            border-radius: 6px;
-            padding: 10px;
-            margin: 8px 0;
-            display: none;
-        }
-
-        .heic-warning.show {
-            display: block;
-        }
-
-        .heic-warning h4 {
-            color: #f87171;
-            font-size: 0.85rem;
-        }
-
-        .heic-warning p {
-            color: #94a3b8;
-            font-size: 0.8rem;
-        }
-
-        .heic-warning a {
-            color: #4cc9f0;
-        }
-
-        footer {
-            margin-top: 30px;
-            padding: 15px;
-            text-align: center;
-            color: #64748b;
-            border-top: 1px solid #334155;
-            font-size: 0.8rem;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 10px;
-            flex-wrap: wrap;
-        }
-
-        .footer-links a {
-            color: #4cc9f0;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            font-size: 0.8rem;
-        }
-
-        .footer-links a:hover {
-            color: #4361ee;
-            transform: translateY(-2px);
-        }
-
-        .spec-box {
-            background: rgba(15, 23, 42, 0.5);
-            border-radius: 8px;
-            padding: 12px 15px;
-            margin-top: 10px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 8px;
-        }
-
-        .spec-box .spec-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.8rem;
-            color: #94a3b8;
-        }
-
-        .spec-box .spec-item .label {
-            color: #64748b;
-        }
-
-        .spec-box .spec-item .value {
-            color: #e2e8f0;
-            font-weight: 600;
-        }
-
-        .spec-box .spec-item .value.cut {
-            color: #f87171;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 10px;
-            }
-
-            header {
-                flex-direction: column;
-                text-align: center;
-                padding: 15px;
-            }
-
-            .logo-container {
-                flex-direction: column;
-            }
-
-            .logo-text h1 {
-                font-size: 1.5rem;
-            }
-
-            .main-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .a4-page {
-                max-width: 100%;
-            }
-
-            .status-bar {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .status-bar .info {
-                justify-content: center;
-            }
-
-            .preview-toolbar {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .preview-toolbar .page-controls {
-                justify-content: center;
-            }
-
-            .header-info .badge {
-                font-size: 0.65rem;
-                padding: 4px 8px;
-            }
-
-            .spec-box {
-                grid-template-columns: 1fr;
-            }
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background: linear-gradient(135deg, #0f172a, #1e293b); color: #e2e8f0; min-height: 100vh; }
+       .container { max-width: 1600px; margin: 0 auto; padding: 20px; }
+        header { display: flex; justify-content: space-between; align-items: center; padding: 20px 30px; background: rgba(30, 41, 59, 0.8); backdrop-filter: blur(10px); border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1); margin-bottom: 30px; flex-wrap: wrap; gap: 15px; }
+       .logo-container { display: flex; align-items: center; gap: 15px; }
+       .logo { width: 60px; height: 60px; background: linear-gradient(135deg, #3a0ca3, #4361ee, #4cc9f0); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: bold; color: white; }
+       .logo-text h1 { font-size: 2rem; background: linear-gradient(to right, #4cc9f0, #4361ee); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+       .header-info { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+       .header-info.badge { background: rgba(76, 201, 240, 0.15); border: 1px solid rgba(76, 201, 240, 0.3); padding: 6px 12px; border-radius: 20px; font-size: 0.75rem; color: #4cc9f0; }
+       .header-info.badge.cut { border-color: rgba(239, 68, 68, 0.3); color: #f87171; }
+       .main-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 30px; }
+        @media (max-width: 1024px) {.main-grid { grid-template-columns: 1fr; } }
+       .card { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); padding: 25px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1); }
+       .card h2 { color: #4cc9f0; margin-bottom: 15px; font-size: 1.2rem; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+       .upload-area { border: 2px dashed #475569; border-radius: 12px; padding: 30px 20px; text-align: center; cursor: pointer; background: rgba(15, 23, 42, 0.5); margin-bottom: 15px; }
+       .upload-area.drag-over { border-color: #4cc9f0; background: rgba(76, 201, 240, 0.1); }
+       .btn { padding: 10px 20px; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; }
+       .btn-primary { background: linear-gradient(135deg, #3a0ca3, #4361ee); color: white; }
+       .btn-success { background: linear-gradient(135deg, #10b981, #059669); color: white; }
+       .btn-danger { background: linear-gradient(135deg, #ef4444, #dc2626); color: white; }
+       .hidden { display: none!important; }
+       .photo-counter { background: linear-gradient(135deg, #3a0ca3, #4361ee); color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.75rem; }
+       .photo-list { max-height: 200px; overflow-y: auto; margin: 10px 0; }
+       .photo-item { display: flex; align-items: center; padding: 8px; border-bottom: 1px solid #334155; gap: 10px; }
+       .photo-thumb { width: 40px; height: 40px; object-fit: cover; border-radius: 6px; }
+       .photo-info { flex: 1; min-width: 0; }
+       .photo-name { font-weight: 600; font-size: 0.8rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+       .progress-bar { width: 100%; height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; margin: 8px 0; display: none; }
+       .progress-bar.progress-fill { height: 100%; background: linear-gradient(90deg, #3a0ca3, #4cc9f0); width: 0%; }
+       .progress-bar.active { display: block; }
+       .a4-page-container { background: #1a1a2e; padding: 20px; border-radius: 12px; display: flex; justify-content: center; min-height: 500px; }
+       .a4-page { background: white; width: 100%; max-width: 500px; aspect-ratio: 28 / 19; position: relative; box-shadow: 0 10px 40px rgba(0,0,0,0.5); overflow: hidden; }
+       .photo-grid { width: 100%; height: 100%; padding: 5px; }
+       .photo-slot { width: 100%; height: 100%; background: #f1f5f9; display: flex; align-items: center; justify-content: center; }
+       .photo-slot img { width: 100%; height: 100%; object-fit: contain; }
+       .cut-marks { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5; }
+       .cut-marks.cut-line { position: absolute; border: 1px solid #ef4444; top: 5%; left: 5%; right: 5%; bottom: 5%; opacity: 0.7; }
+       .status-bar { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-top: 12px; padding: 12px 15px; background: rgba(15, 23, 42, 0.5); border-radius: 8px; }
+       .toast { position: fixed; bottom: 20px; right: 20px; padding: 12px 20px; border-radius: 10px; color: white; transform: translateY(100px); opacity: 0; transition: all 0.3s ease; z-index: 1000; }
+       .toast.show { transform: translateY(0); opacity: 1; }
+       .toast.success { background: linear-gradient(135deg, #10b981, #059669); }
+       .toast.error { background: linear-gradient(135deg, #ef4444, #dc2626); }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
             <div class="logo-container">
-                <div class="logo" aria-hidden="true">PB</div>
-                <div class="logo-text">
-                    <h1>PB-CROMA PRO</h1>
-                    <p>Editor de Fotos com Sangria 27x19cm | Corte 26x18cm</p>
-                </div>
+                <div class="logo">PB</div>
+                <div class="logo-text"><h1>PB-CROMA PRO</h1><p>Editor 28x19cm Sulfite | Corte 27x18cm</p></div>
             </div>
             <div class="header-info">
-                <span class="badge"><i class="fas fa-crop-alt"></i> 27×19 cm</span>
-                <span class="badge cut"><i class="fas fa-cut"></i> Corte 26×18 cm</span>
+                <span class="badge"><i class="fas fa-crop-alt"></i> 28×19 cm</span>
+                <span class="badge cut"><i class="fas fa-cut"></i> Corte 27×18 cm</span>
                 <span class="badge"><i class="fas fa-images"></i> 200 Fotos</span>
-                <span class="badge"><i class="fas fa-arrow-up"></i> Vertical</span>
             </div>
         </header>
-
         <div class="main-grid">
             <div class="card">
-                <h2>
-                    <i class="fas fa-upload"></i> Importar Fotos
-                    <span class="photo-counter" id="photoCounter">0 / 200</span>
-                </h2>
-                <p style="color: #94a3b8; font-size: 0.85rem; margin-bottom: 12px;">
-                    Selecione até <strong>200 fotos</strong> de uma só vez
-                </p>
-
-                <div class="upload-area" id="uploadArea" role="button" tabindex="0">
-                    <i class="fas fa-cloud-upload-alt"></i>
+                <h2><i class="fas fa-upload"></i> Importar Fotos<span class="photo-counter" id="photoCounter">0 / 200</span></h2>
+                <div class="upload-area" id="uploadArea">
+                    <i class="fas fa-cloud-upload-alt" style="font-size:36px;color:#4cc9f0"></i>
                     <p><strong>Arraste e solte suas fotos aqui</strong></p>
-                    <p style="font-size: 0.8rem;">ou</p>
                     <input type="file" id="fileInput" accept="image/*" multiple class="hidden">
-                    <button class="btn btn-primary" id="browseBtn">
-                        <i class="fas fa-folder-open"></i> Selecionar Fotos
-                    </button>
-                    <div class="formats">
-                        <span class="heic">HEIC</span>
-                        <span class="heic">HEIF</span>
-                        <span>JPEG</span>
-                        <span>PNG</span>
-                        <span>WEBP</span>
-                        <span>BMP</span>
-                        <span>GIF</span>
-                        <span>TIFF</span>
-                    </div>
+                    <button class="btn btn-primary" id="browseBtn">Selecionar Fotos</button>
                 </div>
-
-                <div class="spec-box">
-                    <div class="spec-item">
-                        <span class="label">📐 Com Sangria:</span>
-                        <span class="value">27 × 19 cm</span>
-                    </div>
-                    <div class="spec-item">
-                        <span class="label">✂️ Linha de Corte:</span>
-                        <span class="value cut">26 × 18 cm</span>
-                    </div>
-                    <div class="spec-item">
-                        <span class="label">📄 Página:</span>
-                        <span class="value">A4 Vertical</span>
-                    </div>
-                    <div class="spec-item">
-                        <span class="label">📦 Máximo:</span>
-                        <span class="value">200 fotos</span>
-                    </div>
-                </div>
-
-                <div class="heic-warning" id="heicWarning">
-                    <h4><i class="fas fa-exclamation-triangle"></i> Dica HEIC</h4>
-                    <p>Converta HEIC para JPEG em <a href="https://heic.online/" target="_blank">heic.online</a></p>
-                </div>
-
-                <div class="progress-bar" id="progressBar">
-                    <div class="progress-fill" id="progressFill"></div>
-                </div>
-
-                <div class="photo-list" id="photoList">
-                    <p style="text-align: center; color: #64748b; padding: 15px; font-size: 0.9rem;">
-                        <i class="fas fa-inbox" style="font-size: 1.5rem; display: block; margin-bottom: 5px;"></i>
-                        Nenhuma foto selecionada
-                    </p>
-                </div>
-
-                <div class="stats-grid">
-                    <div class="stat-item">
-                        <div class="stat-value" id="statPhotos">0</div>
-                        <div class="stat-label">Fotos</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value" id="statPages">0</div>
-                        <div class="stat-label">Páginas</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value" id="statSize">0</div>
-                        <div class="stat-label">Tamanho</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value" id="statFormats">-</div>
-                        <div class="stat-label">Formatos</div>
-                    </div>
-                </div>
-
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-                    <button class="btn btn-danger" id="clearBtn"><i class="fas fa-trash"></i> Limpar</button>
-                    <button class="btn btn-success" id="processBtn" disabled><i class="fas fa-play"></i> Processar</button>
-                </div>
+                <div class="progress-bar" id="progressBar"><div class="progress-fill" id="progressFill"></div></div>
+                <div class="photo-list" id="photoList"><p style="text-align:center;color:#64748b;padding:15px;">Nenhuma foto selecionada</p></div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;"><button class="btn btn-danger" id="clearBtn">Limpar</button><button class="btn btn-success" id="processBtn" disabled>Processar</button></div>
             </div>
-
-            <div class="card preview-container">
-                <div class="preview-toolbar">
-                    <h2 style="margin: 0; font-size: 1.1rem;">
-                        <i class="fas fa-eye"></i> Pré-visualização
-                    </h2>
-                    <div class="page-controls">
-                        <button id="prevPageBtn" disabled><i class="fas fa-chevron-left"></i></button>
-                        <span id="pageIndicator">Página 1 de 1</span>
-                        <button id="nextPageBtn" disabled><i class="fas fa-chevron-right"></i></button>
-                    </div>
+            <div class="card">
+                <div style="display:flex;justify-content:space-between;margin-bottom:15px;">
+                    <h2 style="margin:0;"><i class="fas fa-eye"></i> Pré-visualização - 28x19cm</h2>
+                    <div><button id="prevPageBtn">◀</button><span id="pageIndicator">Página 1 de 1</span><button id="nextPageBtn">▶</button></div>
                 </div>
-
                 <div class="a4-page-container">
                     <div class="a4-page" id="a4Page">
-                        <div class="photo-grid" id="photoGrid">
-                            <div class="photo-slot empty" id="photoSlot">
-                                <div class="photo-placeholder">
-                                    <i class="fas fa-image"></i>
-                                    <span>Adicione uma foto</span>
-                                    <p>HEIC, JPG, PNG, WEBP, BMP, GIF, TIFF</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="page-label" id="pageLabel">Página 1</div>
-                        <div class="cut-marks" id="cutMarks">
-                            <div class="corner tl"></div>
-                            <div class="corner tr"></div>
-                            <div class="corner bl"></div>
-                            <div class="corner br"></div>
-                            <div class="bleed"></div>
-                            <div class="cut-line" id="cutLine"></div>
-                        </div>
+                        <div class="photo-grid"><div class="photo-slot" id="photoSlot"><div style="text-align:center;color:#94a3b8;"><i class="fas fa-image" style="font-size:2.5rem;display:block;margin-bottom:8px;"></i>Adicione uma foto - 28x19cm</div></div></div>
+                        <div class="cut-marks" id="cutMarks"><div class="cut-line"></div></div>
                     </div>
                 </div>
-
                 <div class="status-bar">
-                    <div class="info">
-                        <span><i class="fas fa-images"></i> <strong id="totalPhotos">0</strong> fotos</span>
-                        <span><i class="fas fa-file-pdf"></i> <strong id="totalPages">0</strong> páginas</span>
-                        <span><i class="fas fa-arrows-alt-h"></i> <strong>27×19 cm</strong></span>
-                        <span class="cut-info"><i class="fas fa-cut"></i> Corte: <strong>26×18 cm</strong></span>
-                    </div>
-                    <div>
-                        <button class="btn btn-primary" id="downloadBtn" disabled>
-                            <i class="fas fa-download"></i> Baixar PDF
-                        </button>
-                    </div>
+                    <div><span><strong id="totalPhotos">0</strong> fotos</span> | <span><strong id="totalPages">0</strong> páginas</span> | <strong>28×19 cm</strong> | Corte: <strong>27×18 cm</strong></div>
+                    <button class="btn btn-primary" id="downloadBtn" disabled>Baixar PDF 28x19</button>
                 </div>
             </div>
         </div>
-
-        <div style="margin-top: 25px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-            <div class="card">
-                <h2 style="font-size: 1rem;"><i class="fas fa-info-circle"></i> Como Usar</h2>
-                <ol style="color: #94a3b8; line-height: 2; padding-left: 18px; font-size: 0.85rem;">
-                    <li>Selecione até <strong>200 fotos</strong> de uma só vez</li>
-                    <li>Formatos: <strong>HEIC, HEIF, JPG, PNG, WEBP, BMP, GIF, TIFF</strong></li>
-                    <li>Clique em <strong>"Processar"</strong> para organizar</li>
-                    <li>A foto terá <strong>27×19 cm</strong> com sangria</li>
-                    <li>A <strong>linha de corte</strong> será 26×18 cm (em vermelho)</li>
-                    <li>Clique em <strong>"Baixar PDF"</strong> para salvar</li>
-                </ol>
-            </div>
-            <div class="card">
-                <h2 style="font-size: 1rem;"><i class="fas fa-ruler-combined"></i> Especificações</h2>
-                <ul style="color: #94a3b8; line-height: 2; list-style: none; padding: 0; font-size: 0.85rem;">
-                    <li>📐 <strong>Sangria:</strong> 27 × 19 cm</li>
-                    <li>✂️ <strong>Linha de Corte:</strong> 26 × 18 cm</li>
-                    <li>📄 <strong>Página:</strong> A4 Vertical (210 × 297 mm)</li>
-                    <li>📏 <strong>Sangria:</strong> 0,5 cm em cada lado</li>
-                    <li>📦 <strong>Máximo:</strong> 200 fotos</li>
-                </ul>
-            </div>
-        </div>
-
-        <footer>
-            <p>PB-CROMA PRO &copy; 2024 - Editor de Fotos com Sangria 27×19cm | Corte 26×18cm</p>
-            <div class="footer-links">
-                <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
-                <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
-                <a href="#"><i class="fas fa-shopping-cart"></i> Mercado Livre</a>
-            </div>
-        </footer>
     </div>
-
     <div id="toast" class="toast"></div>
-
     <script>
+        // CÓDIGO CORRIGIDO PARA 28x19CM SULFITE
         document.addEventListener('DOMContentLoaded', function() {
-            // ============ ESTADO ============
-            const state = {
-                photos: [],
-                currentPage: 0,
-                totalPages: 0,
-                maxPhotos: 200,
-                photosPerPage: 1,
-                // TAMANHO COM SANGRIA: 27cm LARGURA x 19cm ALTURA
-                photoWidth: 270, // mm
-                photoHeight: 190, // mm
-                // LINHA DE CORTE: 26cm LARGURA x 18cm ALTURA
-                cutWidth: 260, // mm
-                cutHeight: 180, // mm
-                totalSize: 0,
-                formats: new Set(),
-                isProcessing: false,
-                isUploading: false
-            };
-
-            // ============ DOM ============
+            const state = { photos: [], currentPage: 0, totalPages: 0, maxPhotos: 200, photoWidth: 280, photoHeight: 190, cutWidth: 270, cutHeight: 180, totalSize: 0, formats: new Set() };
             const uploadArea = document.getElementById('uploadArea');
             const fileInput = document.getElementById('fileInput');
             const browseBtn = document.getElementById('browseBtn');
@@ -1108,624 +112,108 @@
             const prevPageBtn = document.getElementById('prevPageBtn');
             const nextPageBtn = document.getElementById('nextPageBtn');
             const pageIndicator = document.getElementById('pageIndicator');
-            const pageLabel = document.getElementById('pageLabel');
             const photoCounter = document.getElementById('photoCounter');
             const totalPhotos = document.getElementById('totalPhotos');
-            const totalPages = document.getElementById('totalPages');
+            const totalPagesEl = document.getElementById('totalPages');
             const toast = document.getElementById('toast');
             const progressBar = document.getElementById('progressBar');
             const progressFill = document.getElementById('progressFill');
-            const statPhotos = document.getElementById('statPhotos');
-            const statPages = document.getElementById('statPages');
-            const statSize = document.getElementById('statSize');
-            const statFormats = document.getElementById('statFormats');
-            const heicWarning = document.getElementById('heicWarning');
             const cutMarks = document.getElementById('cutMarks');
-            const cutLine = document.getElementById('cutLine');
 
-            // ============ TOAST ============
-            function showToast(message, type = 'info') {
-                toast.textContent = message;
-                toast.className = 'toast ' + type;
-                toast.classList.add('show');
-                clearTimeout(toast._timeout);
-                toast._timeout = setTimeout(() => {
-                    toast.classList.remove('show');
-                }, 3500);
+            function showToast(m,t='info'){ toast.textContent=m; toast.className='toast '+t+' show'; setTimeout(()=>toast.classList.remove('show'),3000); }
+            function formatFileSize(b){ if(b===0) return '0'; const k=1024,s=['B','KB','MB'],i=Math.floor(Math.log(b)/Math.log(k)); return parseFloat((b/Math.pow(k,i)).toFixed(1))+s[i]; }
+            function isImageFile(f){ return f.type.startsWith('image/') || /\.(jpe?g|png|webp|heic|heif|bmp|gif|tiff?)$/i.test(f.name); }
+
+            function updateCounters(){
+                photoCounter.textContent = `${state.photos.length} / ${state.maxPhotos}`;
+                totalPhotos.textContent = state.photos.length;
+                totalPagesEl.textContent = state.totalPages;
+                processBtn.disabled = state.photos.length===0;
+                downloadBtn.disabled = state.totalPages===0;
             }
 
-            // ============ UTILITÁRIOS ============
-            function formatFileSize(bytes) {
-                if (bytes === 0) return '0';
-                const k = 1024;
-                const sizes = ['B', 'KB', 'MB', 'GB'];
-                const i = Math.floor(Math.log(bytes) / Math.log(k));
-                return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + sizes[i];
-            }
-
-            function getFileExtension(filename) {
-                return filename.split('.').pop().toLowerCase();
-            }
-
-            function getFormatTag(format) {
-                const tags = {
-                    'heic': 'HEIC', 'heif': 'HEIF',
-                    'jpg': 'JPG', 'jpeg': 'JPG',
-                    'png': 'PNG', 'webp': 'WEBP',
-                    'bmp': 'BMP', 'gif': 'GIF',
-                    'tiff': 'TIFF', 'tif': 'TIFF'
-                };
-                return tags[format] || format.toUpperCase();
-            }
-
-            function isHeicFile(file) {
-                const name = file.name.toLowerCase();
-                const type = file.type.toLowerCase();
-                return name.endsWith('.heic') || name.endsWith('.heif') ||
-                       type === 'image/heic' || type === 'image/heif';
-            }
-
-            function isImageFile(file) {
-                const name = file.name.toLowerCase();
-                const extensions = ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.webp', '.tiff', '.tif', '.heic', '.heif'];
-                return extensions.some(ext => name.endsWith(ext)) || file.type.startsWith('image/');
-            }
-
-            // ============ UPDATE FUNCTIONS ============
-            function updateCounters() {
-                const count = state.photos.length;
-                photoCounter.textContent = `${count} / ${state.maxPhotos}`;
-                totalPhotos.textContent = count;
-                totalPages.textContent = state.totalPages || 0;
-                processBtn.disabled = count === 0 || state.isProcessing;
-                downloadBtn.disabled = count === 0 || state.totalPages === 0;
-                
-                statPhotos.textContent = count;
-                statPages.textContent = state.totalPages || 0;
-                statSize.textContent = formatFileSize(state.totalSize);
-                const formatList = Array.from(state.formats).map(f => f.toUpperCase()).join(', ');
-                statFormats.textContent = formatList || '-';
-            }
-
-            function updatePageControls() {
-                const total = state.totalPages || 0;
-                prevPageBtn.disabled = state.currentPage === 0 || total === 0;
-                nextPageBtn.disabled = state.currentPage >= total - 1 || total === 0;
-                pageIndicator.textContent = total > 0 ? 
-                    `Página ${state.currentPage + 1} de ${total}` : 
-                    'Página 1 de 1';
-                pageLabel.textContent = total > 0 ? 
-                    `Página ${state.currentPage + 1}` : 
-                    'Página 1';
-            }
-
-            function updateProgress(value, total) {
-                const percent = total > 0 ? (value / total) * 100 : 0;
-                progressFill.style.width = Math.min(percent, 100) + '%';
-                if (value >= total && total > 0) {
-                    setTimeout(() => {
-                        progressBar.classList.remove('active');
-                    }, 500);
-                } else {
-                    progressBar.classList.add('active');
-                }
-            }
-
-            // ============ CONVERSÃO HEIC ============
-            async function convertHeicWithCanvas(file) {
-                return new Promise((resolve, reject) => {
-                    try {
-                        const reader = new FileReader();
-                        reader.onload = function(e) {
-                            try {
-                                const img = new Image();
-                                img.onload = function() {
-                                    try {
-                                        const canvas = document.createElement('canvas');
-                                        canvas.width = img.width;
-                                        canvas.height = img.height;
-                                        const ctx = canvas.getContext('2d');
-                                        ctx.drawImage(img, 0, 0);
-                                        const dataUrl = canvas.toDataURL('image/jpeg', 0.92);
-                                        fetch(dataUrl)
-                                            .then(res => res.blob())
-                                            .then(blob => {
-                                                const newName = file.name.replace(/\.(heic|heif|HEIC|HEIF)$/i, '.jpg');
-                                                const converted = new File([blob], newName, { type: 'image/jpeg' });
-                                                resolve(converted);
-                                            })
-                                            .catch(reject);
-                                    } catch (err) {
-                                        reject(new Error('Erro no canvas: ' + err.message));
-                                    }
-                                };
-                                img.onerror = () => reject(new Error('Erro ao carregar HEIC'));
-                                img.src = e.target.result;
-                            } catch (err) {
-                                reject(err);
-                            }
-                        };
-                        reader.onerror = () => reject(new Error('Erro ao ler arquivo'));
-                        reader.readAsDataURL(file);
-                    } catch (err) {
-                        reject(err);
-                    }
+            function renderList(){
+                if(state.photos.length===0){ photoList.innerHTML='<p style="text-align:center;color:#64748b;padding:15px;">Nenhuma foto</p>'; return; }
+                photoList.innerHTML='';
+                state.photos.forEach((p,i)=>{
+                    const d=document.createElement('div'); d.className='photo-item';
+                    d.innerHTML=`<img src="${p.url}" class="photo-thumb"><div class="photo-info"><div class="photo-name">${p.name}</div><div style="font-size:0.7rem;color:#94a3b8;">${formatFileSize(p.size)}</div></div><button onclick="window.removePhoto(${i})">X</button>`;
+                    photoList.appendChild(d);
                 });
             }
 
-            // ============ CARREGAR IMAGEM ============
-            function loadImageFromFile(file) {
-                return new Promise((resolve, reject) => {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        const img = new Image();
-                        img.onload = function() {
-                            resolve({
-                                url: e.target.result,
-                                img: img,
-                                width: img.width,
-                                height: img.height
-                            });
-                        };
-                        img.onerror = () => reject(new Error(`Não foi possível carregar ${file.name}`));
-                        img.src = e.target.result;
-                    };
-                    reader.onerror = () => reject(new Error(`Erro ao ler ${file.name}`));
-                    reader.readAsDataURL(file);
-                });
-            }
-
-            // ============ ADICIONAR FOTOS (CHUNK) ============
-            async function addPhotos(files) {
-                const remaining = state.maxPhotos - state.photos.length;
-                if (files.length > remaining) {
-                    showToast(`Só é possível adicionar mais ${remaining} foto(s)`, 'error');
-                    files = Array.from(files).slice(0, remaining);
-                }
-
-                if (files.length === 0) return;
-
-                state.isUploading = true;
-                state.isProcessing = true;
-                processBtn.disabled = true;
-
-                let processed = 0;
-                let total = files.length;
-                let successCount = 0;
-                const CHUNK_SIZE = 10;
-
-                for (let i = 0; i < files.length; i += CHUNK_SIZE) {
-                    const chunk = Array.from(files).slice(i, i + CHUNK_SIZE);
-                    
-                    await Promise.all(chunk.map(async (file) => {
-                        try {
-                            if (!isImageFile(file)) {
-                                processed++;
-                                updateProgress(processed, total);
-                                return;
-                            }
-
-                            let imageFile = file;
-                            let isHeic = false;
-
-                            if (isHeicFile(file)) {
-                                isHeic = true;
-                                try {
-                                    imageFile = await convertHeicWithCanvas(file);
-                                } catch (error) {
-                                    showToast(`Erro ao converter ${file.name}`, 'error');
-                                    heicWarning.classList.add('show');
-                                    processed++;
-                                    updateProgress(processed, total);
-                                    return;
-                                }
-                            }
-
-                            const result = await loadImageFromFile(imageFile);
-                            
-                            if (result.width === 0 || result.height === 0) {
-                                processed++;
-                                updateProgress(processed, total);
-                                return;
-                            }
-
-                            const extension = getFileExtension(imageFile.name);
-                            const format = getFormatTag(extension);
-
-                            state.photos.push({
-                                id: Date.now() + '_' + Math.random().toString(36).substr(2, 6),
-                                name: imageFile.name,
-                                originalName: file.name,
-                                size: imageFile.size,
-                                url: result.url,
-                                width: result.width,
-                                height: result.height,
-                                rotation: 0,
-                                isHeic: isHeic,
-                                format: format,
-                                extension: extension
-                            });
-
-                            state.totalSize += imageFile.size;
-                            state.formats.add(format);
-
-                            successCount++;
-                            processed++;
-                            updateProgress(processed, total);
-                            renderPhotoList();
-                            updateCounters();
-
-                        } catch (error) {
-                            console.error('Erro:', error);
-                            processed++;
-                            updateProgress(processed, total);
-                        }
-                    }));
-
-                    renderPhotoList();
-                    updateCounters();
-                    await new Promise(r => setTimeout(r, 50));
-                }
-
-                state.isUploading = false;
-                state.isProcessing = false;
-                updateCounters();
-                
-                if (successCount > 0) {
-                    showToast(`${successCount} foto(s) adicionada(s) com sucesso!`, 'success');
-                }
-
-                setTimeout(() => {
-                    progressBar.classList.remove('active');
-                    progressFill.style.width = '0%';
-                }, 1000);
-            }
-
-            // ============ REMOVER FOTO ============
-            function removePhoto(index) {
-                const photo = state.photos[index];
-                if (photo) {
-                    state.totalSize -= photo.size;
-                    state.formats = new Set(state.photos.map(p => p.format));
-                    state.photos.splice(index, 1);
-                }
-                renderPhotoList();
-                updateCounters();
-                if (state.photos.length === 0) {
-                    clearPreview();
-                    state.totalPages = 0;
-                    state.currentPage = 0;
-                    updatePageControls();
-                } else {
-                    renderPreview();
-                }
-                showToast('Foto removida', 'info');
-            }
-
-            // ============ LIMPAR ============
-            function clearAllPhotos() {
-                if (state.photos.length === 0) return;
-                if (confirm('Remover todas as fotos?')) {
-                    state.photos = [];
-                    state.totalSize = 0;
-                    state.formats = new Set();
-                    state.totalPages = 0;
-                    state.currentPage = 0;
-                    renderPhotoList();
-                    clearPreview();
-                    updateCounters();
-                    updatePageControls();
-                    downloadBtn.disabled = true;
-                    showToast('Todas as fotos removidas', 'info');
-                }
-            }
-
-            // ============ RENDERIZAR LISTA ============
-            function renderPhotoList() {
-                if (state.photos.length === 0) {
-                    photoList.innerHTML = `
-                        <p style="text-align: center; color: #64748b; padding: 15px; font-size: 0.9rem;">
-                            <i class="fas fa-inbox" style="font-size: 1.5rem; display: block; margin-bottom: 5px;"></i>
-                            Nenhuma foto selecionada
-                        </p>
-                    `;
-                    return;
-                }
-
-                photoList.innerHTML = '';
-                state.photos.forEach((photo, index) => {
-                    const item = document.createElement('div');
-                    item.className = 'photo-item';
-                    const formatClass = photo.extension === 'heic' || photo.extension === 'heif' ? 'heic' : 'jpg';
-                    item.innerHTML = `
-                        <img src="${photo.url}" class="photo-thumb" alt="${photo.name}" loading="lazy">
-                        <div class="photo-info">
-                            <div class="photo-name">
-                                ${photo.name.length > 30 ? photo.name.substring(0, 27) + '...' : photo.name}
-                                <span class="format-tag ${formatClass}">${photo.format}</span>
-                                ${photo.isHeic ? '<span class="format-tag heic">HEIC</span>' : ''}
-                            </div>
-                            <div class="photo-size">${formatFileSize(photo.size)} · ${photo.width}×${photo.height}</div>
-                        </div>
-                        <div class="photo-actions">
-                            <button onclick="window.rotatePhoto(${index})" title="Rotacionar">
-                                <i class="fas fa-rotate-right"></i>
-                            </button>
-                            <button onclick="window.removePhoto(${index})" title="Remover">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </div>
-                    `;
-                    photoList.appendChild(item);
-                });
-            }
-
-            // ============ PREVIEW ============
-            function clearPreview() {
-                photoSlot.innerHTML = `
-                    <div class="photo-placeholder">
-                        <i class="fas fa-image"></i>
-                        <span>Adicione uma foto</span>
-                        <p>HEIC, JPG, PNG, WEBP, BMP, GIF, TIFF</p>
-                    </div>
-                `;
-                photoSlot.className = 'photo-slot empty';
-                cutMarks.style.display = 'none';
-            }
-
-            function renderPreview() {
-                if (state.photos.length === 0 || state.totalPages === 0) {
-                    clearPreview();
-                    return;
-                }
-
+            function renderPreview(){
+                if(state.photos.length===0){ photoSlot.innerHTML='<div style="text-align:center;color:#94a3b8;">Adicione uma foto</div>'; return; }
                 const photo = state.photos[state.currentPage];
-
-                if (photo) {
-                    photoSlot.className = 'photo-slot';
-                    photoSlot.innerHTML = `
-                        <img src="${photo.url}" style="transform: rotate(${photo.rotation || 0}deg); object-fit: contain; width: 100%; height: 100%;" alt="${photo.name}">
-                    `;
-                    cutMarks.style.display = 'block';
-                } else {
-                    clearPreview();
-                }
-
-                updatePageControls();
+                if(photo){ photoSlot.innerHTML=`<img src="${photo.url}" style="width:100%;height:100%;object-fit:contain;transform:rotate(${photo.rotation||0}deg)">`; cutMarks.style.display='block'; }
+                pageIndicator.textContent=`Página ${state.currentPage+1} de ${state.totalPages}`;
             }
 
-            // ============ ROTAÇÃO ============
-            function rotatePhoto(index) {
-                if (state.photos[index]) {
-                    state.photos[index].rotation = (state.photos[index].rotation || 0) + 90;
-                    renderPhotoList();
-                    renderPreview();
+            async function addPhotos(files){
+                files = Array.from(files).slice(0, state.maxPhotos - state.photos.length);
+                let count=0;
+                progressBar.classList.add('active');
+                for(let i=0;i<files.length;i++){
+                    const file=files[i];
+                    if(!isImageFile(file)) continue;
+                    const url = await new Promise(res=>{ const r=new FileReader(); r.onload=e=>res(e.target.result); r.readAsDataURL(file); });
+                    state.photos.push({ name:file.name, size:file.size, url:url, rotation:0 });
+                    count++;
+                    progressFill.style.width=((i+1)/files.length*100)+'%';
+                    renderList(); updateCounters();
                 }
+                progressBar.classList.remove('active');
+                showToast(`${count} fotos adicionadas - 28x19cm`,'success');
             }
 
-            // ============ PROCESSAR ============
-            function processPhotos() {
-                if (state.photos.length === 0) {
-                    showToast('Nenhuma foto para processar', 'error');
-                    return;
-                }
+            window.removePhoto=(i)=>{ state.photos.splice(i,1); renderList(); updateCounters(); renderPreview(); };
 
+            function processPhotos(){
                 state.totalPages = state.photos.length;
-                state.currentPage = 0;
-                
-                renderPreview();
-                updateCounters();
-                downloadBtn.disabled = false;
-                showToast(`${state.photos.length} fotos processadas!`, 'success');
+                state.currentPage=0;
+                renderPreview(); updateCounters();
+                downloadBtn.disabled=false;
+                showToast(`${state.photos.length} fotos processadas em 28x19cm!`,'success');
             }
 
-            // ============ NAVEGAÇÃO ============
-            function goToPrevPage() {
-                if (state.currentPage > 0) {
-                    state.currentPage--;
-                    renderPreview();
-                }
-            }
-
-            function goToNextPage() {
-                if (state.currentPage < state.totalPages - 1) {
-                    state.currentPage++;
-                    renderPreview();
-                }
-            }
-
-            // ============ GERAR PDF ============
-            async function generatePDF() {
-                if (state.photos.length === 0 || state.totalPages === 0) {
-                    showToast('Nenhuma foto para exportar', 'error');
-                    return;
-                }
-
-                downloadBtn.disabled = true;
-                downloadBtn.innerHTML = '<span class="spinner"></span> Gerando...';
-
-                try {
-                    if (typeof window.jspdf === 'undefined') {
-                        throw new Error('Biblioteca PDF não carregada');
-                    }
-
+            async function generatePDF(){
+                if(state.photos.length===0) return;
+                downloadBtn.disabled=true; downloadBtn.textContent='Gerando...';
+                try{
                     const { jsPDF } = window.jspdf;
-                    const doc = new jsPDF({
-                        orientation: 'portrait',
-                        unit: 'mm',
-                        format: 'a4'
-                    });
-
-                    const margin = 3;
-                    // TAMANHO COM SANGRIA: 270mm x 190mm (27x19cm)
-                    const photoW = 270;
-                    const photoH = 190;
-                    // LINHA DE CORTE: 260mm x 180mm (26x18cm)
-                    const cutW = 260;
-                    const cutH = 180;
-                    const pageW = 210;
-                    const pageH = 297;
-
-                    // Calcular escala para caber na página A4
-                    const maxW = pageW - margin * 2;
-                    const maxH = pageH - margin * 2;
-                    
-                    let finalW = photoW;
-                    let finalH = photoH;
-                    
-                    const scaleW = maxW / photoW;
-                    const scaleH = maxH / photoH;
-                    const scale = Math.min(scaleW, scaleH);
-                    
-                    finalW = photoW * scale;
-                    finalH = photoH * scale;
-
-                    // Posição da foto com sangria
-                    const x = (pageW - finalW) / 2;
-                    const y = (pageH - finalH) / 2;
-
-                    // Tamanho da linha de corte na escala
-                    const cutFinalW = cutW * scale;
-                    const cutFinalH = cutH * scale;
-                    const cutX = (pageW - cutFinalW) / 2;
-                    const cutY = (pageH - cutFinalH) / 2;
-
-                    const totalPages = state.photos.length;
-
-                    for (let p = 0; p < totalPages; p++) {
-                        if (p > 0) {
-                            doc.addPage('portrait');
-                        }
-
-                        const photo = state.photos[p];
-
-                        if (photo) {
-                            const rotation = photo.rotation || 0;
-                            
-                            if (rotation !== 0) {
-                                doc.rotate(rotation, { origin: [x + finalW/2, y + finalH/2] });
-                            }
-                            
-                            // Adicionar imagem com sangria (27x19cm)
-                            doc.addImage(photo.url, 'JPEG', x, y, finalW, finalH);
-                            
-                            if (rotation !== 0) {
-                                doc.rotate(-rotation, { origin: [x + finalW/2, y + finalH/2] });
-                            }
-
-                            // ===== LINHA DE CORTE (26x18cm) - VERMELHA =====
-                            doc.setDrawColor(255, 0, 0); // Vermelho
-                            doc.setLineWidth(0.3);
-                            doc.setLineDashPattern([], 0);
-                            doc.rect(cutX, cutY, cutFinalW, cutFinalH);
-
-                            // ===== MARCAS DE REGISTRO/CORTE =====
-                            const markSize = 8;
-                            const markOffset = 2;
-
-                            doc.setDrawColor(0);
-                            doc.setLineWidth(0.3);
-
-                            function drawCross(cx, cy, size) {
-                                doc.line(cx - size/2, cy, cx + size/2, cy);
-                                doc.line(cx, cy - size/2, cx, cy + size/2);
-                            }
-
-                            // Marcas nos cantos da linha de corte
-                            const cutCorners = [
-                                { x: cutX - markOffset, y: cutY - markOffset },
-                                { x: cutX + cutFinalW + markOffset, y: cutY - markOffset },
-                                { x: cutX - markOffset, y: cutY + cutFinalH + markOffset },
-                                { x: cutX + cutFinalW + markOffset, y: cutY + cutFinalH + markOffset }
-                            ];
-
-                            cutCorners.forEach(corner => {
-                                drawCross(corner.x, corner.y, markSize);
-                            });
-
-                            // ===== LINHA DE SANGRIA (27x19cm) - CINZA PONTILHADA =====
-                            doc.setDrawColor(128, 128, 128);
-                            doc.setLineWidth(0.2);
-                            doc.setLineDashPattern([2, 2], 0);
-                            doc.rect(x, y, finalW, finalH);
-                            doc.setLineDashPattern([], 0);
-
-                            // Informações da página
-                            doc.setFontSize(6);
-                            doc.setTextColor(150);
-                            doc.text(`PB-CROMA PRO - ${p + 1}/${totalPages}`, margin + 2, margin + 4);
-                            doc.text(`Sangria: 27x19cm | Corte: 26x18cm`, margin + 2, margin + 8);
-                            doc.text(`Foto: ${photo.name}`, margin + 2, margin + 12);
-                        }
+                    // *** CORREÇÃO PRINCIPAL: PDF NO TAMANHO EXATO 28x19CM ***
+                    const doc = new jsPDF({ orientation: 'landscape', unit: 'mm', format: [280, 190] });
+                    for(let p=0;p<state.photos.length;p++){
+                        if(p>0) doc.addPage([280, 190], 'landscape');
+                        const photo=state.photos[p];
+                        // FOTO OCUPA 100% DA FOLHA 28x19
+                        doc.addImage(photo.url, 'JPEG', 0, 0, 280, 190);
+                        // Linha de corte 27x18
+                        doc.setDrawColor(255,0,0); doc.setLineWidth(0.3);
+                        doc.rect(5, 5, 270, 180);
+                        // Marcas de corte
+                        doc.setDrawColor(0); doc.setLineWidth(0.2);
+                        doc.line(0,5,5,5); doc.line(5,0,5,5);
+                        doc.line(275,0,275,5); doc.line(280,5,275,5);
+                        doc.line(0,185,5,185); doc.line(5,190,5,185);
+                        doc.line(275,185,275,190); doc.line(275,185,280,185);
                     }
-
-                    doc.save('fotos-27x19cm-sangria-26x18cm-corte.pdf');
-                    showToast('PDF gerado com sucesso!', 'success');
-
-                } catch (error) {
-                    console.error('Erro:', error);
-                    showToast('Erro ao gerar PDF: ' + error.message, 'error');
-                } finally {
-                    downloadBtn.disabled = false;
-                    downloadBtn.innerHTML = '<i class="fas fa-download"></i> Baixar PDF';
-                }
+                    doc.save('fotos-28x19cm-sulfite-corte-27x18cm.pdf');
+                    showToast('PDF 28x19cm gerado!','success');
+                }catch(e){ showToast('Erro: '+e.message,'error'); }
+                finally{ downloadBtn.disabled=false; downloadBtn.textContent='Baixar PDF 28x19'; }
             }
 
-            // ============ EXPOR FUNÇÕES GLOBAIS ============
-            window.removePhoto = removePhoto;
-            window.rotatePhoto = rotatePhoto;
-
-            // ============ EVENT LISTENERS ============
-            browseBtn.addEventListener('click', () => fileInput.click());
-
-            fileInput.addEventListener('change', function(e) {
-                if (this.files.length > 0) {
-                    addPhotos(this.files);
-                }
-                this.value = '';
-            });
-
-            uploadArea.addEventListener('dragover', (e) => {
-                e.preventDefault();
-                uploadArea.classList.add('drag-over');
-            });
-
-            uploadArea.addEventListener('dragleave', () => {
-                uploadArea.classList.remove('drag-over');
-            });
-
-            uploadArea.addEventListener('drop', (e) => {
-                e.preventDefault();
-                uploadArea.classList.remove('drag-over');
-                if (e.dataTransfer.files.length > 0) {
-                    addPhotos(e.dataTransfer.files);
-                }
-            });
-
-            uploadArea.addEventListener('click', () => fileInput.click());
-
-            processBtn.addEventListener('click', processPhotos);
-            clearBtn.addEventListener('click', clearAllPhotos);
-            downloadBtn.addEventListener('click', generatePDF);
-            prevPageBtn.addEventListener('click', goToPrevPage);
-            nextPageBtn.addEventListener('click', goToNextPage);
-
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'ArrowLeft') goToPrevPage();
-                if (e.key === 'ArrowRight') goToNextPage();
-            });
-
-            // ============ INICIALIZAÇÃO ============
-            updateCounters();
-            updatePageControls();
-            clearPreview();
-
-            console.log('PB-CROMA PRO inicializado!');
-            console.log(`- Sangria: 27 × 19 cm`);
-            console.log(`- Linha de Corte: 26 × 18 cm`);
-            console.log(`- Máximo: ${state.maxPhotos} fotos`);
-            console.log(`- Formato: A4 Retrato (Vertical)`);
-            console.log(`- Upload: Chunk de 10 fotos`);
+            browseBtn.addEventListener('click',()=>fileInput.click());
+            fileInput.addEventListener('change',e=>{ addPhotos(e.target.files); e.target.value=''; });
+            uploadArea.addEventListener('dragover',e=>{ e.preventDefault(); uploadArea.classList.add('drag-over'); });
+            uploadArea.addEventListener('drop',e=>{ e.preventDefault(); addPhotos(e.dataTransfer.files); });
+            uploadArea.addEventListener('click',()=>fileInput.click());
+            processBtn.addEventListener('click',processPhotos);
+            clearBtn.addEventListener('click',()=>{ state.photos=[]; state.totalPages=0; renderList(); updateCounters(); renderPreview(); });
+            downloadBtn.addEventListener('click',generatePDF);
+            prevPageBtn.addEventListener('click',()=>{ if(state.currentPage>0){ state.currentPage--; renderPreview(); } });
+            nextPageBtn.addEventListener('click',()=>{ if(state.currentPage<state.totalPages-1){ state.currentPage++; renderPreview(); } });
         });
     </script>
 </body>
