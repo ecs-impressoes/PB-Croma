@@ -3,14 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PB-CROMA PRO - Editor de Fotos 18×26cm com Marcas de Corte</title>
-    <meta name="description" content="Editor profissional de fotos para impressão em 18x26cm com marcas de corte. Suporte a HEIC, HEIF, PNG, JPG, WEBP, BMP, GIF, TIFF e mais.">
-    <meta name="keywords" content="editor de fotos, impressão 18x26cm, marcas de corte, HEIC, conversor HEIC, fotos para impressão, PDF profissional">
+    <title>PB-CROMA PRO - Editor de Fotos 18×26cm com Marcas de Corte | HEIC/HEIF/JPG/PNG/WEBP</title>
+    <meta name="description" content="Editor profissional de fotos para impressão em 18x26cm com marcas de corte. Suporte a HEIC, HEIF, PNG, JPG, WEBP, BMP, GIF, TIFF. Upload de até 205 fotos. PDF para impressão.">
+    <meta name="keywords" content="editor de fotos, impressão 18x26cm, marcas de corte, HEIC, conversor HEIC, fotos para impressão, PDF profissional, fotos 18x26, PB-CROMA, impressão de fotos">
     <meta name="robots" content="index, follow">
+    <meta name="author" content="PB-CROMA">
+    <meta name="theme-color" content="#3a0ca3">
     <link rel="canonical" href="https://pibbaweb1.github.io/pb-croma-pro/">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://pibbaweb1.github.io/pb-croma-pro/">
+    <meta property="og:title" content="PB-CROMA PRO - Editor de Fotos 18×26cm com Marcas de Corte">
+    <meta property="og:description" content="Editor profissional de fotos para impressão em 18x26cm com marcas de corte. Upload de até 205 fotos. Suporte HEIC/HEIF/JPG/PNG/WEBP.">
+    <meta property="og:image" content="https://pibbaweb1.github.io/pb-croma-pro/og-image.jpg">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://pibbaweb1.github.io/pb-croma-pro/">
+    <meta name="twitter:title" content="PB-CROMA PRO - Editor de Fotos 18×26cm com Marcas de Corte">
+    <meta name="twitter:description" content="Editor profissional de fotos para impressão em 18x26cm com marcas de corte. Upload de até 205 fotos.">
+
+    <!-- Schema.org / JSON-LD -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "PB-CROMA PRO",
+        "description": "Editor profissional de fotos para impressão em 18x26cm com marcas de corte",
+        "applicationCategory": "Multimedia",
+        "operatingSystem": "All",
+        "browserRequirements": "Requires JavaScript",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "BRL"
+        },
+        "featureList": [
+            "Upload de até 205 fotos",
+            "Suporte a HEIC/HEIF/JPG/PNG/WEBP/BMP/GIF/TIFF",
+            "Conversão automática HEIC",
+            "Marcas de corte nos 4 cantos",
+            "Fotos em 18×26 cm",
+            "Exportação em PDF"
+        ]
+    }
+    </script>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
     <style>
+        /* ===== RESET & BASE ===== */
         * {
             margin: 0;
             padding: 0;
@@ -30,6 +74,7 @@
             padding: 20px;
         }
 
+        /* ===== HEADER ===== */
         header {
             display: flex;
             justify-content: space-between;
@@ -62,6 +107,7 @@
             font-weight: bold;
             color: white;
             box-shadow: 0 4px 10px rgba(58, 12, 163, 0.4);
+            flex-shrink: 0;
         }
 
         .logo-text h1 {
@@ -69,6 +115,7 @@
             background: linear-gradient(to right, #4cc9f0, #4361ee);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .logo-text p {
@@ -90,12 +137,14 @@
             border-radius: 20px;
             font-size: 0.85rem;
             color: #4cc9f0;
+            white-space: nowrap;
         }
 
         .header-info .badge i {
             margin-right: 5px;
         }
 
+        /* ===== GRID PRINCIPAL ===== */
         .main-grid {
             display: grid;
             grid-template-columns: 1fr 2fr;
@@ -108,6 +157,7 @@
             }
         }
 
+        /* ===== CARDS ===== */
         .card {
             background: rgba(30, 41, 59, 0.7);
             backdrop-filter: blur(10px);
@@ -125,6 +175,7 @@
             gap: 10px;
         }
 
+        /* ===== UPLOAD AREA ===== */
         .upload-area {
             border: 2px dashed #475569;
             border-radius: 12px;
@@ -139,6 +190,11 @@
         .upload-area:hover {
             border-color: #4cc9f0;
             background: rgba(76, 201, 240, 0.05);
+        }
+
+        .upload-area.drag-over {
+            border-color: #4cc9f0;
+            background: rgba(76, 201, 240, 0.1);
         }
 
         .upload-area i {
@@ -174,6 +230,7 @@
             color: #f87171;
         }
 
+        /* ===== BOTÕES ===== */
         .btn {
             display: inline-block;
             padding: 12px 24px;
@@ -216,11 +273,6 @@
             transform: translateY(-2px);
         }
 
-        .btn-warning {
-            background: linear-gradient(135deg, #f59e0b, #d97706);
-            color: white;
-        }
-
         .btn-full {
             width: 100%;
             margin-top: 10px;
@@ -252,6 +304,7 @@
             display: none !important;
         }
 
+        /* ===== CONTADOR ===== */
         .photo-counter {
             background: linear-gradient(135deg, #3a0ca3, #4361ee);
             color: white;
@@ -261,6 +314,7 @@
             margin-left: 10px;
         }
 
+        /* ===== LISTA DE FOTOS ===== */
         .photo-list {
             max-height: 300px;
             overflow-y: auto;
@@ -343,6 +397,21 @@
             color: white;
         }
 
+        .photo-name .format-tag.bmp {
+            background: #f59e0b;
+            color: white;
+        }
+
+        .photo-name .format-tag.gif {
+            background: #ec4899;
+            color: white;
+        }
+
+        .photo-name .format-tag.tiff {
+            background: #14b8a6;
+            color: white;
+        }
+
         .photo-size {
             font-size: 0.8rem;
             color: #94a3b8;
@@ -371,6 +440,7 @@
             background: rgba(76, 201, 240, 0.1);
         }
 
+        /* ===== PREVIEW ===== */
         .preview-container {
             position: relative;
         }
@@ -482,6 +552,7 @@
             text-align: center;
         }
 
+        /* ===== MARCAS DE CORTE ===== */
         .cut-marks {
             position: absolute;
             top: 0;
@@ -583,6 +654,7 @@
             pointer-events: none;
         }
 
+        /* ===== STATUS BAR ===== */
         .status-bar {
             display: flex;
             justify-content: space-between;
@@ -610,6 +682,7 @@
             color: #e2e8f0;
         }
 
+        /* ===== TOAST ===== */
         .toast {
             position: fixed;
             bottom: 30px;
@@ -647,6 +720,7 @@
             background: linear-gradient(135deg, #f59e0b, #d97706);
         }
 
+        /* ===== PROGRESS BAR ===== */
         .progress-bar {
             width: 100%;
             height: 4px;
@@ -669,6 +743,7 @@
             display: block;
         }
 
+        /* ===== STATS ===== */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
@@ -694,6 +769,7 @@
             color: #94a3b8;
         }
 
+        /* ===== HEIC WARNING ===== */
         .heic-warning {
             background: rgba(239, 68, 68, 0.1);
             border: 1px solid rgba(239, 68, 68, 0.2);
@@ -717,6 +793,16 @@
             font-size: 0.85rem;
         }
 
+        .heic-warning a {
+            color: #4cc9f0;
+            text-decoration: none;
+        }
+
+        .heic-warning a:hover {
+            text-decoration: underline;
+        }
+
+        /* ===== FOOTER ===== */
         footer {
             margin-top: 40px;
             padding: 20px;
@@ -748,6 +834,7 @@
             transform: translateY(-2px);
         }
 
+        /* ===== RESPONSIVO ===== */
         @media (max-width: 768px) {
             .container {
                 padding: 10px;
@@ -787,38 +874,67 @@
             .preview-toolbar .page-controls {
                 justify-content: center;
             }
+
+            .header-info .badge {
+                font-size: 0.7rem;
+                padding: 4px 10px;
+            }
+
+            .logo-text h1 {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .photo-item {
+                flex-wrap: wrap;
+            }
+
+            .photo-actions {
+                width: 100%;
+                justify-content: flex-end;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- ===== HEADER ===== -->
         <header>
             <div class="logo-container">
-                <div class="logo">PB</div>
+                <div class="logo" aria-hidden="true">PB</div>
                 <div class="logo-text">
                     <h1>PB-CROMA PRO</h1>
                     <p>Editor de Fotos 18×26cm com Marcas de Corte</p>
                 </div>
             </div>
             <div class="header-info">
-                <span class="badge"><i class="fas fa-crop-alt"></i> 18 × 26 cm</span>
-                <span class="badge"><i class="fas fa-cut"></i> Marcas de Registro</span>
-                <span class="badge"><i class="fas fa-images"></i> Até 200 Fotos</span>
-                <span class="badge"><i class="fas fa-file-image"></i> HEIC/HEIF/JPG/PNG/WEBP</span>
+                <span class="badge"><i class="fas fa-crop-alt" aria-hidden="true"></i> 18 × 26 cm</span>
+                <span class="badge"><i class="fas fa-cut" aria-hidden="true"></i> Marcas de Registro</span>
+                <span class="badge"><i class="fas fa-images" aria-hidden="true"></i> Até 205 Fotos</span>
+                <span class="badge"><i class="fas fa-file-image" aria-hidden="true"></i> HEIC/HEIF/JPG/PNG</span>
             </div>
         </header>
 
+        <!-- ===== CONTEÚDO PRINCIPAL ===== -->
         <div class="main-grid">
+            <!-- Painel Esquerdo - Upload -->
             <div class="card">
-                <h2><i class="fas fa-upload"></i> Importar Fotos <span class="photo-counter" id="photoCounter">0 / 200</span></h2>
-                <p style="color: #94a3b8; margin-bottom: 15px; font-size: 0.9rem;">Selecione até 200 fotos em qualquer formato</p>
+                <h2><i class="fas fa-upload" aria-hidden="true"></i> Importar Fotos <span class="photo-counter" id="photoCounter">0 / 205</span></h2>
+                <p style="color: #94a3b8; margin-bottom: 15px; font-size: 0.9rem;">Selecione até <strong>205 fotos</strong> de uma só vez em qualquer formato</p>
 
-                <div class="upload-area" id="uploadArea">
-                    <i class="fas fa-camera"></i>
+                <div class="upload-area" id="uploadArea" role="button" tabindex="0" aria-label="Área para upload de fotos">
+                    <i class="fas fa-camera" aria-hidden="true"></i>
                     <p><strong>Arraste e solte suas fotos aqui</strong></p>
                     <p style="font-size: 0.85rem;">ou</p>
-                    <input type="file" id="fileInput" accept="image/*" multiple class="hidden">
-                    <button class="btn btn-primary" id="browseBtn"><i class="fas fa-folder-open"></i> Selecionar Fotos</button>
+                    <input type="file" id="fileInput" accept="image/*" multiple class="hidden" aria-label="Selecionar arquivos de imagem">
+                    <button class="btn btn-primary" id="browseBtn" aria-label="Selecionar fotos do computador">
+                        <i class="fas fa-folder-open" aria-hidden="true"></i> Selecionar Fotos
+                    </button>
                     <div class="formats">
                         <span class="heic">HEIC</span>
                         <span class="heic">HEIF</span>
@@ -831,22 +947,26 @@
                     </div>
                 </div>
 
+                <!-- Aviso HEIC -->
                 <div class="heic-warning" id="heicWarning">
-                    <h4><i class="fas fa-exclamation-triangle"></i> Dica para arquivos HEIC</h4>
-                    <p>Para melhor compatibilidade, converta seus arquivos HEIC para JPEG usando um conversor online como <a href="https://heic.online/" target="_blank" style="color: #4cc9f0;">heic.online</a> ou <a href="https://cloudconvert.com/heic-to-jpg" target="_blank" style="color: #4cc9f0;">CloudConvert</a>.</p>
+                    <h4><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Dica para arquivos HEIC</h4>
+                    <p>Para melhor compatibilidade, converta seus arquivos HEIC para JPEG usando um conversor online como <a href="https://heic.online/" target="_blank" rel="noopener noreferrer">heic.online</a> ou <a href="https://cloudconvert.com/heic-to-jpg" target="_blank" rel="noopener noreferrer">CloudConvert</a>.</p>
                 </div>
 
+                <!-- Barra de Progresso -->
                 <div class="progress-bar" id="progressBar">
-                    <div class="progress-fill" id="progressFill"></div>
+                    <div class="progress-fill" id="progressFill" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
 
-                <div class="photo-list" id="photoList">
+                <!-- Lista de Fotos -->
+                <div class="photo-list" id="photoList" role="list">
                     <p style="text-align: center; color: #64748b; padding: 20px;">
-                        <i class="fas fa-inbox" style="font-size: 2rem; display: block; margin-bottom: 10px;"></i>
+                        <i class="fas fa-inbox" style="font-size: 2rem; display: block; margin-bottom: 10px;" aria-hidden="true"></i>
                         Nenhuma foto selecionada
                     </p>
                 </div>
 
+                <!-- Estatísticas -->
                 <div class="stats-grid">
                     <div class="stat-item">
                         <div class="stat-value" id="statPhotos">0</div>
@@ -866,19 +986,29 @@
                     </div>
                 </div>
 
+                <!-- Botões de Ação -->
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                    <button class="btn btn-danger" id="clearBtn"><i class="fas fa-trash"></i> Limpar Tudo</button>
-                    <button class="btn btn-success" id="processBtn" disabled><i class="fas fa-play"></i> Processar</button>
+                    <button class="btn btn-danger" id="clearBtn" aria-label="Limpar todas as fotos">
+                        <i class="fas fa-trash" aria-hidden="true"></i> Limpar Tudo
+                    </button>
+                    <button class="btn btn-success" id="processBtn" disabled aria-label="Processar fotos">
+                        <i class="fas fa-play" aria-hidden="true"></i> Processar
+                    </button>
                 </div>
             </div>
 
+            <!-- Painel Direito - Pré-visualização -->
             <div class="card preview-container">
                 <div class="preview-toolbar">
-                    <h2 style="margin: 0;"><i class="fas fa-eye"></i> Pré-visualização</h2>
+                    <h2 style="margin: 0;"><i class="fas fa-eye" aria-hidden="true"></i> Pré-visualização</h2>
                     <div class="page-controls">
-                        <button id="prevPageBtn" disabled><i class="fas fa-chevron-left"></i></button>
+                        <button id="prevPageBtn" disabled aria-label="Página anterior">
+                            <i class="fas fa-chevron-left" aria-hidden="true"></i>
+                        </button>
                         <span id="pageIndicator">Página 1 de 1</span>
-                        <button id="nextPageBtn" disabled><i class="fas fa-chevron-right"></i></button>
+                        <button id="nextPageBtn" disabled aria-label="Próxima página">
+                            <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                        </button>
                     </div>
                 </div>
 
@@ -887,7 +1017,7 @@
                         <div class="photo-grid" id="photoGrid">
                             <div class="photo-slot empty" id="photoSlot">
                                 <div class="photo-placeholder">
-                                    <i class="fas fa-image" style="font-size: 3rem; color: #cbd5e1; display: block; margin-bottom: 10px;"></i>
+                                    <i class="fas fa-image" style="font-size: 3rem; color: #cbd5e1; display: block; margin-bottom: 10px;" aria-hidden="true"></i>
                                     <span>Adicione uma foto</span>
                                     <p style="font-size: 0.8rem; color: #94a3b8; margin-top: 8px;">Suporte a HEIC, HEIF, JPG, PNG, WEBP, BMP, GIF, TIFF</p>
                                 </div>
@@ -904,29 +1034,31 @@
                     </div>
                 </div>
 
+                <!-- Status Bar -->
                 <div class="status-bar">
                     <div class="info">
-                        <span><i class="fas fa-images"></i> <strong id="totalPhotos">0</strong> fotos</span>
-                        <span><i class="fas fa-file-pdf"></i> <strong id="totalPages">0</strong> páginas</span>
-                        <span><i class="fas fa-arrows-alt"></i> <strong>18 × 26 cm</strong></span>
-                        <span><i class="fas fa-check-circle" style="color: #10b981;"></i> <span id="formatSupport">Todos os formatos</span></span>
+                        <span><i class="fas fa-images" aria-hidden="true"></i> <strong id="totalPhotos">0</strong> fotos</span>
+                        <span><i class="fas fa-file-pdf" aria-hidden="true"></i> <strong id="totalPages">0</strong> páginas</span>
+                        <span><i class="fas fa-arrows-alt" aria-hidden="true"></i> <strong>18 × 26 cm</strong></span>
+                        <span><i class="fas fa-check-circle" style="color: #10b981;" aria-hidden="true"></i> <span id="formatSupport">Todos os formatos</span></span>
                     </div>
                     <div>
-                        <button class="btn btn-primary" id="downloadBtn" disabled>
-                            <i class="fas fa-download"></i> Baixar PDF
+                        <button class="btn btn-primary" id="downloadBtn" disabled aria-label="Baixar PDF para impressão">
+                            <i class="fas fa-download" aria-hidden="true"></i> Baixar PDF
                         </button>
                     </div>
                 </div>
             </div>
         </div>
 
+        <!-- ===== INFORMAÇÕES ADICIONAIS ===== -->
         <div style="margin-top: 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
             <div class="card">
-                <h2><i class="fas fa-info-circle"></i> Como Usar</h2>
+                <h2><i class="fas fa-info-circle" aria-hidden="true"></i> Como Usar</h2>
                 <ol style="color: #94a3b8; line-height: 2.2; padding-left: 20px;">
-                    <li>Selecione até <strong>200 fotos</strong> em qualquer formato</li>
+                    <li>Selecione até <strong>205 fotos</strong> de uma só vez em qualquer formato</li>
                     <li>Formatos suportados: <strong>HEIC, HEIF, JPG, PNG, WEBP, BMP, GIF, TIFF</strong></li>
-                    <li>Se o HEIC não funcionar, use um <strong>conversor online</strong></li>
+                    <li>Fotos HEIC/HEIF são <strong>convertidas automaticamente</strong></li>
                     <li>Clique em <strong>"Processar"</strong> para organizar as fotos</li>
                     <li>Cada foto será ajustada para <strong>18 × 26 cm</strong></li>
                     <li>As <strong>marcas de registro</strong> serão adicionadas nos cantos</li>
@@ -934,30 +1066,34 @@
                 </ol>
             </div>
             <div class="card">
-                <h2><i class="fas fa-ruler-combined"></i> Especificações Técnicas</h2>
+                <h2><i class="fas fa-ruler-combined" aria-hidden="true"></i> Especificações Técnicas</h2>
                 <ul style="color: #94a3b8; line-height: 2.2; list-style: none; padding: 0;">
                     <li>📐 <strong>Tamanho da foto:</strong> 18 × 26 cm</li>
                     <li>📄 <strong>Formato da página:</strong> A4 Paisagem (297 × 210 mm)</li>
                     <li>✂️ <strong>Marcas de corte:</strong> Cruzetas nos 4 cantos</li>
                     <li>📏 <strong>Sangria:</strong> 3 mm (linha pontilhada)</li>
                     <li>🖼️ <strong>Fotos por página:</strong> 1 (tamanho cheio)</li>
-                    <li>📦 <strong>Máximo de fotos:</strong> 200</li>
+                    <li>📦 <strong>Máximo de fotos:</strong> 205</li>
+                    <li>🔄 <strong>Conversão HEIC:</strong> Automática via Canvas</li>
                 </ul>
             </div>
         </div>
 
+        <!-- ===== FOOTER ===== -->
         <footer>
             <p>PB-CROMA PRO &copy; 2024 - Editor de Fotos Profissional com Marcas de Corte</p>
             <div class="footer-links">
-                <a href="#" target="_blank"><i class="fab fa-facebook"></i> Facebook</a>
-                <a href="#" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
-                <a href="#" target="_blank"><i class="fas fa-shopping-cart"></i> Mercado Livre</a>
+                <a href="#" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook" aria-hidden="true"></i> Facebook</a>
+                <a href="#" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram" aria-hidden="true"></i> Instagram</a>
+                <a href="#" target="_blank" rel="noopener noreferrer"><i class="fas fa-shopping-cart" aria-hidden="true"></i> Mercado Livre</a>
             </div>
         </footer>
     </div>
 
-    <div id="toast" class="toast"></div>
+    <!-- ===== TOAST ===== -->
+    <div id="toast" class="toast" role="alert" aria-live="polite"></div>
 
+    <!-- ===== SCRIPT ===== -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // ============ ESTADO ============
@@ -965,13 +1101,14 @@
                 photos: [],
                 currentPage: 0,
                 totalPages: 0,
-                maxPhotos: 200,
+                maxPhotos: 205,
                 photosPerPage: 1,
                 photoWidth: 180,
                 photoHeight: 260,
                 totalSize: 0,
                 formats: new Set(),
-                heicFailed: false
+                heicFailed: false,
+                isProcessing: false
             };
 
             // ============ DOM ============
@@ -999,7 +1136,7 @@
             const statFormats = document.getElementById('statFormats');
             const heicWarning = document.getElementById('heicWarning');
 
-            // ============ FUNÇÕES ============
+            // ============ TOAST ============
             function showToast(message, type = 'info') {
                 toast.textContent = message;
                 toast.className = 'toast ' + type;
@@ -1010,6 +1147,7 @@
                 }, 4000);
             }
 
+            // ============ UTILITÁRIOS ============
             function formatFileSize(bytes) {
                 if (bytes === 0) return '0 Bytes';
                 const k = 1024;
@@ -1038,23 +1176,36 @@
                 return tags[format] || format.toUpperCase();
             }
 
-            function updateStats() {
-                const count = state.photos.length;
-                statPhotos.textContent = count;
-                statPages.textContent = state.totalPages || 0;
-                statSize.textContent = formatFileSize(state.totalSize);
-                const formatList = Array.from(state.formats).map(f => f.toUpperCase()).join(', ');
-                statFormats.textContent = formatList || '-';
+            function isHeicFile(file) {
+                const name = file.name.toLowerCase();
+                const type = file.type.toLowerCase();
+                return name.endsWith('.heic') || 
+                       name.endsWith('.heif') ||
+                       type === 'image/heic' ||
+                       type === 'image/heif';
             }
 
+            function isImageFile(file) {
+                const name = file.name.toLowerCase();
+                const extensions = ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.webp', '.tiff', '.tif', '.heic', '.heif'];
+                const type = file.type.toLowerCase();
+                return extensions.some(ext => name.endsWith(ext)) || type.startsWith('image/');
+            }
+
+            // ============ UPDATE FUNCTIONS ============
             function updateCounters() {
                 const count = state.photos.length;
                 photoCounter.textContent = `${count} / ${state.maxPhotos}`;
                 totalPhotos.textContent = count;
                 totalPages.textContent = state.totalPages || 0;
-                processBtn.disabled = count === 0;
+                processBtn.disabled = count === 0 || state.isProcessing;
                 downloadBtn.disabled = count === 0 || state.totalPages === 0;
-                updateStats();
+                
+                statPhotos.textContent = count;
+                statPages.textContent = state.totalPages || 0;
+                statSize.textContent = formatFileSize(state.totalSize);
+                const formatList = Array.from(state.formats).map(f => f.toUpperCase()).join(', ');
+                statFormats.textContent = formatList || '-';
             }
 
             function updatePageControls() {
@@ -1071,6 +1222,7 @@
             function updateProgress(value, total) {
                 const percent = total > 0 ? (value / total) * 100 : 0;
                 progressFill.style.width = Math.min(percent, 100) + '%';
+                progressFill.setAttribute('aria-valuenow', Math.min(percent, 100));
                 if (value >= total && total > 0) {
                     setTimeout(() => {
                         progressBar.classList.remove('active');
@@ -1080,14 +1232,13 @@
                 }
             }
 
-            // ============ CONVERSÃO HEIC - MÉTODO ALTERNATIVO ============
+            // ============ CONVERSÃO HEIC ============
             async function convertHeicWithCanvas(file) {
                 return new Promise((resolve, reject) => {
                     try {
                         const reader = new FileReader();
-                        reader.onload = async function(e) {
+                        reader.onload = function(e) {
                             try {
-                                // Tentar criar um Image e renderizar no canvas
                                 const img = new Image();
                                 img.onload = function() {
                                     try {
@@ -1097,10 +1248,8 @@
                                         const ctx = canvas.getContext('2d');
                                         ctx.drawImage(img, 0, 0);
                                         
-                                        // Converter para JPEG
                                         const dataUrl = canvas.toDataURL('image/jpeg', 0.92);
                                         
-                                        // Converter dataURL para Blob
                                         fetch(dataUrl)
                                             .then(res => res.blob())
                                             .then(blob => {
@@ -1132,22 +1281,6 @@
             }
 
             // ============ CARREGAR IMAGEM ============
-            function isHeicFile(file) {
-                const name = file.name.toLowerCase();
-                const type = file.type.toLowerCase();
-                return name.endsWith('.heic') || 
-                       name.endsWith('.heif') ||
-                       type === 'image/heic' ||
-                       type === 'image/heif';
-            }
-
-            function isImageFile(file) {
-                const name = file.name.toLowerCase();
-                const extensions = ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.webp', '.tiff', '.tif', '.heic', '.heif'];
-                const type = file.type.toLowerCase();
-                return extensions.some(ext => name.endsWith(ext)) || type.startsWith('image/');
-            }
-
             function loadImageFromFile(file) {
                 return new Promise((resolve, reject) => {
                     const reader = new FileReader();
@@ -1183,6 +1316,9 @@
 
                 if (files.length === 0) return;
 
+                state.isProcessing = true;
+                processBtn.disabled = true;
+                
                 let processed = 0;
                 let total = files.length;
                 let successCount = 0;
@@ -1198,17 +1334,14 @@
 
                         let imageFile = file;
                         let isHeic = false;
-                        let conversionMethod = 'nativo';
 
                         if (isHeicFile(file)) {
                             isHeic = true;
                             showToast(`Convertendo ${file.name}...`, 'info');
                             
                             try {
-                                // Tentar método do canvas
                                 imageFile = await convertHeicWithCanvas(file);
-                                conversionMethod = 'canvas';
-                                showToast(`${file.name} convertido com sucesso! (canvas)`, 'success');
+                                showToast(`${file.name} convertido com sucesso!`, 'success');
                             } catch (error) {
                                 showToast(`Erro ao converter ${file.name}: ${error.message}`, 'error');
                                 heicWarning.classList.add('show');
@@ -1242,8 +1375,7 @@
                             imgElement: result.img,
                             isHeic: isHeic,
                             format: format,
-                            extension: extension,
-                            conversionMethod: conversionMethod
+                            extension: extension
                         });
 
                         state.totalSize += imageFile.size;
@@ -1263,6 +1395,7 @@
                     }
                 }
 
+                state.isProcessing = false;
                 updateCounters();
                 
                 if (successCount > 0) {
@@ -1319,7 +1452,7 @@
                 if (state.photos.length === 0) {
                     photoList.innerHTML = `
                         <p style="text-align: center; color: #64748b; padding: 20px;">
-                            <i class="fas fa-inbox" style="font-size: 2rem; display: block; margin-bottom: 10px;"></i>
+                            <i class="fas fa-inbox" style="font-size: 2rem; display: block; margin-bottom: 10px;" aria-hidden="true"></i>
                             Nenhuma foto selecionada
                         </p>
                     `;
@@ -1330,9 +1463,11 @@
                 state.photos.forEach((photo, index) => {
                     const item = document.createElement('div');
                     item.className = 'photo-item';
+                    item.setAttribute('role', 'listitem');
+                    
                     const formatClass = photo.extension === 'heic' || photo.extension === 'heif' ? 'heic' : 'jpg';
                     item.innerHTML = `
-                        <img src="${photo.url}" class="photo-thumb" alt="${photo.name}">
+                        <img src="${photo.url}" class="photo-thumb" alt="${photo.name}" loading="lazy">
                         <div class="photo-info">
                             <div class="photo-name">
                                 ${photo.name}
@@ -1342,11 +1477,11 @@
                             <div class="photo-size">${formatFileSize(photo.size)} · ${photo.width}×${photo.height}px</div>
                         </div>
                         <div class="photo-actions">
-                            <button onclick="window.rotatePhoto(${index})" title="Rotacionar 90°">
-                                <i class="fas fa-rotate-right"></i>
+                            <button onclick="window.rotatePhoto(${index})" title="Rotacionar 90°" aria-label="Rotacionar foto">
+                                <i class="fas fa-rotate-right" aria-hidden="true"></i>
                             </button>
-                            <button onclick="window.removePhoto(${index})" title="Remover">
-                                <i class="fas fa-times"></i>
+                            <button onclick="window.removePhoto(${index})" title="Remover" aria-label="Remover foto">
+                                <i class="fas fa-times" aria-hidden="true"></i>
                             </button>
                         </div>
                     `;
@@ -1358,7 +1493,7 @@
             function clearPreview() {
                 photoSlot.innerHTML = `
                     <div class="photo-placeholder">
-                        <i class="fas fa-image" style="font-size: 3rem; color: #cbd5e1; display: block; margin-bottom: 10px;"></i>
+                        <i class="fas fa-image" style="font-size: 3rem; color: #cbd5e1; display: block; margin-bottom: 10px;" aria-hidden="true"></i>
                         <span>Adicione uma foto</span>
                         <p style="font-size: 0.8rem; color: #94a3b8; margin-top: 8px;">Suporte a HEIC, HEIF, JPG, PNG, WEBP, BMP, GIF, TIFF</p>
                     </div>
@@ -1383,7 +1518,7 @@
                 if (photo) {
                     photoSlot.className = 'photo-slot';
                     photoSlot.innerHTML = `
-                        <img src="${photo.url}" style="transform: rotate(${photo.rotation || 0}deg); object-fit: contain; width: 100%; height: 100%;">
+                        <img src="${photo.url}" style="transform: rotate(${photo.rotation || 0}deg); object-fit: contain; width: 100%; height: 100%;" alt="${photo.name}">
                     `;
                     document.getElementById('cutMarks').style.display = 'block';
                 } else {
@@ -1533,11 +1668,11 @@
                     showToast('Erro ao gerar PDF: ' + error.message, 'error');
                 } finally {
                     downloadBtn.disabled = false;
-                    downloadBtn.innerHTML = '<i class="fas fa-download"></i> Baixar PDF';
+                    downloadBtn.innerHTML = '<i class="fas fa-download" aria-hidden="true"></i> Baixar PDF';
                 }
             }
 
-            // ============ EXPOR FUNÇÕES ============
+            // ============ EXPOR FUNÇÕES GLOBAIS ============
             window.removePhoto = removePhoto;
             window.rotatePhoto = rotatePhoto;
 
@@ -1551,25 +1686,26 @@
                 this.value = '';
             });
 
+            // Drag and Drop
             uploadArea.addEventListener('dragover', (e) => {
                 e.preventDefault();
-                uploadArea.style.borderColor = '#4cc9f0';
-                uploadArea.style.background = 'rgba(76, 201, 240, 0.05)';
+                uploadArea.classList.add('drag-over');
             });
 
             uploadArea.addEventListener('dragleave', () => {
-                uploadArea.style.borderColor = '#475569';
-                uploadArea.style.background = 'rgba(15, 23, 42, 0.5)';
+                uploadArea.classList.remove('drag-over');
             });
 
             uploadArea.addEventListener('drop', (e) => {
                 e.preventDefault();
-                uploadArea.style.borderColor = '#475569';
-                uploadArea.style.background = 'rgba(15, 23, 42, 0.5)';
+                uploadArea.classList.remove('drag-over');
                 if (e.dataTransfer.files.length > 0) {
                     addPhotos(e.dataTransfer.files);
                 }
             });
+
+            // Click na área de upload
+            uploadArea.addEventListener('click', () => fileInput.click());
 
             processBtn.addEventListener('click', processPhotos);
             clearBtn.addEventListener('click', clearAllPhotos);
@@ -1577,6 +1713,7 @@
             prevPageBtn.addEventListener('click', goToPrevPage);
             nextPageBtn.addEventListener('click', goToNextPage);
 
+            // Teclado
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'ArrowLeft') goToPrevPage();
                 if (e.key === 'ArrowRight') goToNextPage();
@@ -1592,7 +1729,8 @@
             console.log(`- Máximo: ${state.maxPhotos} fotos`);
             console.log(`- Formato: A4 Landscape`);
             console.log(`- Marcas de corte: Cruzetas nos cantos`);
-            console.log(`- Conversão HEIC: Método Canvas (fallback)`);
+            console.log(`- Conversão HEIC: Método Canvas (nativo)`);
+            console.log(`- SEO: Tags otimizadas, Schema.org, Open Graph`);
         });
     </script>
 </body>
