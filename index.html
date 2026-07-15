@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PB-CROMA PRO - Editor de Fotos 18×26cm | Upload de 200 Fotos</title>
-    <meta name="description" content="Editor profissional de fotos para impressão em 18x26cm com marcas de corte. Upload de até 200 fotos de uma vez. Suporte HEIC, JPG, PNG, WEBP.">
-    <meta name="keywords" content="editor de fotos, impressão 18x26cm, marcas de corte, HEIC, upload 200 fotos, fotos para impressão">
+    <title>PB-CROMA PRO - Editor de Fotos 26×18cm | Upload de 200 Fotos</title>
+    <meta name="description" content="Editor profissional de fotos para impressão em 26x18cm com marcas de corte. Upload de até 200 fotos de uma vez. Suporte HEIC, JPG, PNG, WEBP.">
+    <meta name="keywords" content="editor de fotos, impressão 26x18cm, marcas de corte, HEIC, upload 200 fotos, fotos para impressão">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://pibbaweb1.github.io/pb-croma-pro/">
     
     <!-- Open Graph -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="PB-CROMA PRO - Editor de Fotos 18×26cm">
-    <meta property="og:description" content="Editor profissional de fotos para impressão em 18x26cm. Upload de até 200 fotos de uma vez.">
+    <meta property="og:title" content="PB-CROMA PRO - Editor de Fotos 26×18cm">
+    <meta property="og:description" content="Editor profissional de fotos para impressão em 26x18cm. Upload de até 200 fotos de uma vez.">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -233,11 +233,6 @@
 
         .btn-danger:hover {
             transform: translateY(-2px);
-        }
-
-        .btn-warning {
-            background: linear-gradient(135deg, #f59e0b, #d97706);
-            color: white;
         }
 
         .btn-full {
@@ -863,11 +858,11 @@
                 <div class="logo" aria-hidden="true">PB</div>
                 <div class="logo-text">
                     <h1>PB-CROMA PRO</h1>
-                    <p>Editor de Fotos 18×26cm com Marcas de Corte</p>
+                    <p>Editor de Fotos 26×18cm com Marcas de Corte</p>
                 </div>
             </div>
             <div class="header-info">
-                <span class="badge"><i class="fas fa-crop-alt"></i> 18×26 cm</span>
+                <span class="badge"><i class="fas fa-crop-alt"></i> 26×18 cm</span>
                 <span class="badge"><i class="fas fa-cut"></i> Marcas de Corte</span>
                 <span class="badge"><i class="fas fa-images"></i> 200 Fotos</span>
                 <span class="badge"><i class="fas fa-arrow-up"></i> Vertical</span>
@@ -986,7 +981,7 @@
                     <div class="info">
                         <span><i class="fas fa-images"></i> <strong id="totalPhotos">0</strong> fotos</span>
                         <span><i class="fas fa-file-pdf"></i> <strong id="totalPages">0</strong> páginas</span>
-                        <span><i class="fas fa-arrows-alt-v"></i> <strong>18×26 cm</strong></span>
+                        <span><i class="fas fa-arrows-alt-h"></i> <strong>26×18 cm</strong></span>
                     </div>
                     <div>
                         <button class="btn btn-primary" id="downloadBtn" disabled>
@@ -1005,14 +1000,14 @@
                     <li>Selecione até <strong>200 fotos</strong> de uma só vez</li>
                     <li>Formatos: <strong>HEIC, HEIF, JPG, PNG, WEBP, BMP, GIF, TIFF</strong></li>
                     <li>Clique em <strong>"Processar"</strong> para organizar</li>
-                    <li>Cada foto será ajustada para <strong>18 × 26 cm</strong></li>
+                    <li>Cada foto será ajustada para <strong>26 × 18 cm</strong></li>
                     <li>Clique em <strong>"Baixar PDF"</strong> para salvar</li>
                 </ol>
             </div>
             <div class="card">
                 <h2 style="font-size: 1rem;"><i class="fas fa-ruler-combined"></i> Especificações</h2>
                 <ul style="color: #94a3b8; line-height: 2; list-style: none; padding: 0; font-size: 0.85rem;">
-                    <li>📐 <strong>Foto:</strong> 18 × 26 cm</li>
+                    <li>📐 <strong>Foto:</strong> 26 × 18 cm (Largura × Altura)</li>
                     <li>📄 <strong>Página:</strong> A4 Vertical (210 × 297 mm)</li>
                     <li>✂️ <strong>Marcas:</strong> Cruzetas nos 4 cantos</li>
                     <li>📏 <strong>Sangria:</strong> 3 mm</li>
@@ -1023,7 +1018,7 @@
 
         <!-- ===== FOOTER ===== -->
         <footer>
-            <p>PB-CROMA PRO &copy; 2024 - Editor de Fotos 18×26cm com Marcas de Corte</p>
+            <p>PB-CROMA PRO &copy; 2024 - Editor de Fotos 26×18cm com Marcas de Corte</p>
             <div class="footer-links">
                 <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
                 <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
@@ -1045,8 +1040,9 @@
                 totalPages: 0,
                 maxPhotos: 200,
                 photosPerPage: 1,
-                photoWidth: 180, // mm
-                photoHeight: 260, // mm
+                // TAMANHO DA FOTO: 26cm LARGURA x 18cm ALTURA
+                photoWidth: 260, // mm
+                photoHeight: 180, // mm
                 totalSize: 0,
                 formats: new Set(),
                 isProcessing: false,
@@ -1517,13 +1513,31 @@
                     });
 
                     const margin = 3;
-                    const photoW = 180;
-                    const photoH = 260;
+                    // FOTO: 260mm LARGURA x 180mm ALTURA (26×18cm)
+                    const photoW = 260;
+                    const photoH = 180;
                     const pageW = 210;
                     const pageH = 297;
 
-                    const x = (pageW - photoW) / 2;
-                    const y = (pageH - photoH) / 2;
+                    // Centralizar a foto na página (a foto é mais larga que a página, então precisamos ajustar)
+                    // Como a foto é 26cm de largura e a página A4 tem 21cm, precisamos redimensionar
+                    // Vamos calcular a escala para caber na página com margem
+                    const maxW = pageW - margin * 2;
+                    const maxH = pageH - margin * 2;
+                    
+                    let finalW = photoW;
+                    let finalH = photoH;
+                    
+                    // Calcular escala para caber na página
+                    const scaleW = maxW / photoW;
+                    const scaleH = maxH / photoH;
+                    const scale = Math.min(scaleW, scaleH);
+                    
+                    finalW = photoW * scale;
+                    finalH = photoH * scale;
+
+                    const x = (pageW - finalW) / 2;
+                    const y = (pageH - finalH) / 2;
 
                     const totalPages = state.photos.length;
 
@@ -1538,13 +1552,13 @@
                             const rotation = photo.rotation || 0;
                             
                             if (rotation !== 0) {
-                                doc.rotate(rotation, { origin: [x + photoW/2, y + photoH/2] });
+                                doc.rotate(rotation, { origin: [x + finalW/2, y + finalH/2] });
                             }
                             
-                            doc.addImage(photo.url, 'JPEG', x, y, photoW, photoH);
+                            doc.addImage(photo.url, 'JPEG', x, y, finalW, finalH);
                             
                             if (rotation !== 0) {
-                                doc.rotate(-rotation, { origin: [x + photoW/2, y + photoH/2] });
+                                doc.rotate(-rotation, { origin: [x + finalW/2, y + finalH/2] });
                             }
 
                             // MARCAS DE REGISTRO/CORTE
@@ -1561,9 +1575,9 @@
 
                             const corners = [
                                 { x: x - markOffset, y: y - markOffset },
-                                { x: x + photoW + markOffset, y: y - markOffset },
-                                { x: x - markOffset, y: y + photoH + markOffset },
-                                { x: x + photoW + markOffset, y: y + photoH + markOffset }
+                                { x: x + finalW + markOffset, y: y - markOffset },
+                                { x: x - markOffset, y: y + finalH + markOffset },
+                                { x: x + finalW + markOffset, y: y + finalH + markOffset }
                             ];
 
                             corners.forEach(corner => {
@@ -1574,18 +1588,18 @@
                             doc.setDrawColor(128, 128, 128);
                             doc.setLineWidth(0.2);
                             doc.setLineDashPattern([2, 2], 0);
-                            doc.rect(x - 3, y - 3, photoW + 6, photoH + 6);
+                            doc.rect(x - 3, y - 3, finalW + 6, finalH + 6);
                             doc.setLineDashPattern([], 0);
 
                             // Info
                             doc.setFontSize(6);
                             doc.setTextColor(150);
                             doc.text(`PB-CROMA PRO - ${p + 1}/${totalPages}`, margin + 2, margin + 4);
-                            doc.text(`18×26cm`, margin + 2, margin + 8);
+                            doc.text(`26×18cm`, margin + 2, margin + 8);
                         }
                     }
 
-                    doc.save('fotos-18x26cm-vertical.pdf');
+                    doc.save('fotos-26x18cm-vertical.pdf');
                     showToast('PDF gerado com sucesso!', 'success');
 
                 } catch (error) {
@@ -1647,9 +1661,9 @@
             clearPreview();
 
             console.log('PB-CROMA PRO inicializado!');
-            console.log(`- Fotos: 18 × 26 cm (Vertical)`);
+            console.log(`- Fotos: 26 × 18 cm (Largura × Altura)`);
             console.log(`- Máximo: ${state.maxPhotos} fotos`);
-            console.log(`- Formato: A4 Retrato`);
+            console.log(`- Formato: A4 Retrato (Vertical)`);
             console.log(`- Upload: Chunk de 10 fotos`);
         });
     </script>
