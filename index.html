@@ -10,7 +10,6 @@
     <link rel="canonical" href="https://pibbaweb1.github.io/pb-croma-pro/">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -217,6 +216,11 @@
             transform: translateY(-2px);
         }
 
+        .btn-warning {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+        }
+
         .btn-full {
             width: 100%;
             margin-top: 10px;
@@ -336,21 +340,6 @@
 
         .photo-name .format-tag.webp {
             background: #06b6d4;
-            color: white;
-        }
-
-        .photo-name .format-tag.bmp {
-            background: #f59e0b;
-            color: white;
-        }
-
-        .photo-name .format-tag.gif {
-            background: #ec4899;
-            color: white;
-        }
-
-        .photo-name .format-tag.tiff {
-            background: #14b8a6;
             color: white;
         }
 
@@ -493,7 +482,6 @@
             text-align: center;
         }
 
-        /* Marcas de registro/corte - CRUZETAS nos cantos */
         .cut-marks {
             position: absolute;
             top: 0;
@@ -683,7 +671,7 @@
 
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
             gap: 10px;
             margin-top: 10px;
         }
@@ -704,6 +692,29 @@
         .stat-item .stat-label {
             font-size: 0.7rem;
             color: #94a3b8;
+        }
+
+        .heic-warning {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            border-radius: 8px;
+            padding: 12px;
+            margin: 10px 0;
+            display: none;
+        }
+
+        .heic-warning.show {
+            display: block;
+        }
+
+        .heic-warning h4 {
+            color: #f87171;
+            margin-bottom: 5px;
+        }
+
+        .heic-warning p {
+            color: #94a3b8;
+            font-size: 0.85rem;
         }
 
         footer {
@@ -776,10 +787,6 @@
             .preview-toolbar .page-controls {
                 justify-content: center;
             }
-
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
         }
     </style>
 </head>
@@ -797,12 +804,11 @@
                 <span class="badge"><i class="fas fa-crop-alt"></i> 18 × 26 cm</span>
                 <span class="badge"><i class="fas fa-cut"></i> Marcas de Registro</span>
                 <span class="badge"><i class="fas fa-images"></i> Até 200 Fotos</span>
-                <span class="badge"><i class="fas fa-file-image"></i> Todos os formatos</span>
+                <span class="badge"><i class="fas fa-file-image"></i> HEIC/HEIF/JPG/PNG/WEBP</span>
             </div>
         </header>
 
         <div class="main-grid">
-            <!-- Painel Esquerdo - Upload e Controle -->
             <div class="card">
                 <h2><i class="fas fa-upload"></i> Importar Fotos <span class="photo-counter" id="photoCounter">0 / 200</span></h2>
                 <p style="color: #94a3b8; margin-bottom: 15px; font-size: 0.9rem;">Selecione até 200 fotos em qualquer formato</p>
@@ -822,10 +828,12 @@
                         <span>BMP</span>
                         <span>GIF</span>
                         <span>TIFF</span>
-                        <span>SVG</span>
-                        <span>ICO</span>
-                        <span>AVIF</span>
                     </div>
+                </div>
+
+                <div class="heic-warning" id="heicWarning">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Dica para arquivos HEIC</h4>
+                    <p>Para melhor compatibilidade, converta seus arquivos HEIC para JPEG usando um conversor online como <a href="https://heic.online/" target="_blank" style="color: #4cc9f0;">heic.online</a> ou <a href="https://cloudconvert.com/heic-to-jpg" target="_blank" style="color: #4cc9f0;">CloudConvert</a>.</p>
                 </div>
 
                 <div class="progress-bar" id="progressBar">
@@ -864,7 +872,6 @@
                 </div>
             </div>
 
-            <!-- Painel Direito - Pré-visualização -->
             <div class="card preview-container">
                 <div class="preview-toolbar">
                     <h2 style="margin: 0;"><i class="fas fa-eye"></i> Pré-visualização</h2>
@@ -887,7 +894,6 @@
                             </div>
                         </div>
                         <div class="page-label" id="pageLabel">Página 1</div>
-                        <!-- Marcas de Corte -->
                         <div class="cut-marks" id="cutMarks">
                             <div class="corner tl"></div>
                             <div class="corner tr"></div>
@@ -919,8 +925,8 @@
                 <h2><i class="fas fa-info-circle"></i> Como Usar</h2>
                 <ol style="color: #94a3b8; line-height: 2.2; padding-left: 20px;">
                     <li>Selecione até <strong>200 fotos</strong> em qualquer formato</li>
-                    <li>Formatos suportados: <strong>HEIC, HEIF, JPG, PNG, WEBP, BMP, GIF, TIFF, SVG, ICO, AVIF</strong></li>
-                    <li>Fotos HEIC/HEIF são <strong>convertidas automaticamente</strong> para JPEG</li>
+                    <li>Formatos suportados: <strong>HEIC, HEIF, JPG, PNG, WEBP, BMP, GIF, TIFF</strong></li>
+                    <li>Se o HEIC não funcionar, use um <strong>conversor online</strong></li>
                     <li>Clique em <strong>"Processar"</strong> para organizar as fotos</li>
                     <li>Cada foto será ajustada para <strong>18 × 26 cm</strong></li>
                     <li>As <strong>marcas de registro</strong> serão adicionadas nos cantos</li>
@@ -935,7 +941,6 @@
                     <li>✂️ <strong>Marcas de corte:</strong> Cruzetas nos 4 cantos</li>
                     <li>📏 <strong>Sangria:</strong> 3 mm (linha pontilhada)</li>
                     <li>🖼️ <strong>Fotos por página:</strong> 1 (tamanho cheio)</li>
-                    <li>🔄 <strong>Conversão HEIC:</strong> Automática para JPEG</li>
                     <li>📦 <strong>Máximo de fotos:</strong> 200</li>
                 </ul>
             </div>
@@ -955,7 +960,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // ============ ESTADO DA APLICAÇÃO ============
+            // ============ ESTADO ============
             const state = {
                 photos: [],
                 currentPage: 0,
@@ -964,15 +969,12 @@
                 photosPerPage: 1,
                 photoWidth: 180,
                 photoHeight: 260,
-                pageWidth: 297,
-                pageHeight: 210,
-                isProcessing: false,
-                isConverting: false,
                 totalSize: 0,
-                formats: new Set()
+                formats: new Set(),
+                heicFailed: false
             };
 
-            // ============ DOM ELEMENTOS ============
+            // ============ DOM ============
             const uploadArea = document.getElementById('uploadArea');
             const fileInput = document.getElementById('fileInput');
             const browseBtn = document.getElementById('browseBtn');
@@ -995,8 +997,9 @@
             const statPages = document.getElementById('statPages');
             const statSize = document.getElementById('statSize');
             const statFormats = document.getElementById('statFormats');
+            const heicWarning = document.getElementById('heicWarning');
 
-            // ============ FUNÇÕES DE UTILIDADE ============
+            // ============ FUNÇÕES ============
             function showToast(message, type = 'info') {
                 toast.textContent = message;
                 toast.className = 'toast ' + type;
@@ -1030,28 +1033,9 @@
                     'bmp': 'BMP',
                     'gif': 'GIF',
                     'tiff': 'TIFF',
-                    'tif': 'TIFF',
-                    'svg': 'SVG',
-                    'ico': 'ICO',
-                    'avif': 'AVIF'
+                    'tif': 'TIFF'
                 };
                 return tags[format] || format.toUpperCase();
-            }
-
-            function getFormatClass(format) {
-                const classes = {
-                    'heic': 'heic',
-                    'heif': 'heic',
-                    'jpg': 'jpg',
-                    'jpeg': 'jpg',
-                    'png': 'png',
-                    'webp': 'webp',
-                    'bmp': 'bmp',
-                    'gif': 'gif',
-                    'tiff': 'tiff',
-                    'tif': 'tiff'
-                };
-                return classes[format] || '';
             }
 
             function updateStats() {
@@ -1059,7 +1043,6 @@
                 statPhotos.textContent = count;
                 statPages.textContent = state.totalPages || 0;
                 statSize.textContent = formatFileSize(state.totalSize);
-                
                 const formatList = Array.from(state.formats).map(f => f.toUpperCase()).join(', ');
                 statFormats.textContent = formatList || '-';
             }
@@ -1069,7 +1052,7 @@
                 photoCounter.textContent = `${count} / ${state.maxPhotos}`;
                 totalPhotos.textContent = count;
                 totalPages.textContent = state.totalPages || 0;
-                processBtn.disabled = count === 0 || state.isConverting;
+                processBtn.disabled = count === 0;
                 downloadBtn.disabled = count === 0 || state.totalPages === 0;
                 updateStats();
             }
@@ -1097,44 +1080,58 @@
                 }
             }
 
-            // ============ CONVERSOR DE HEIC/HEIF ============
-            async function convertHeicToJpeg(file) {
-                try {
-                    if (typeof heic2any === 'undefined') {
-                        console.warn('heic2any não carregado, tentando carregar...');
-                        await loadHeicLibrary();
-                    }
-
-                    const result = await heic2any({
-                        blob: file,
-                        toType: 'image/jpeg',
-                        quality: 0.92
-                    });
-
-                    const newName = file.name.replace(/\.(heic|heif|HEIC|HEIF)$/i, '.jpg');
-                    const convertedFile = new File([result], newName, { type: 'image/jpeg' });
-                    return convertedFile;
-                } catch (error) {
-                    console.error('Erro ao converter HEIC:', error);
-                    throw new Error(`Não foi possível converter ${file.name}: ${error.message}`);
-                }
-            }
-
-            async function loadHeicLibrary() {
+            // ============ CONVERSÃO HEIC - MÉTODO ALTERNATIVO ============
+            async function convertHeicWithCanvas(file) {
                 return new Promise((resolve, reject) => {
-                    if (typeof heic2any !== 'undefined') {
-                        resolve();
-                        return;
+                    try {
+                        const reader = new FileReader();
+                        reader.onload = async function(e) {
+                            try {
+                                // Tentar criar um Image e renderizar no canvas
+                                const img = new Image();
+                                img.onload = function() {
+                                    try {
+                                        const canvas = document.createElement('canvas');
+                                        canvas.width = img.width;
+                                        canvas.height = img.height;
+                                        const ctx = canvas.getContext('2d');
+                                        ctx.drawImage(img, 0, 0);
+                                        
+                                        // Converter para JPEG
+                                        const dataUrl = canvas.toDataURL('image/jpeg', 0.92);
+                                        
+                                        // Converter dataURL para Blob
+                                        fetch(dataUrl)
+                                            .then(res => res.blob())
+                                            .then(blob => {
+                                                const newName = file.name.replace(/\.(heic|heif|HEIC|HEIF)$/i, '.jpg');
+                                                const converted = new File([blob], newName, { type: 'image/jpeg' });
+                                                resolve(converted);
+                                            })
+                                            .catch(reject);
+                                    } catch (canvasError) {
+                                        reject(new Error('Erro ao renderizar no canvas: ' + canvasError.message));
+                                    }
+                                };
+                                img.onerror = function() {
+                                    reject(new Error('Não foi possível carregar a imagem HEIC'));
+                                };
+                                img.src = e.target.result;
+                            } catch (error) {
+                                reject(error);
+                            }
+                        };
+                        reader.onerror = function() {
+                            reject(new Error('Erro ao ler o arquivo'));
+                        };
+                        reader.readAsDataURL(file);
+                    } catch (error) {
+                        reject(error);
                     }
-
-                    const script = document.createElement('script');
-                    script.src = 'https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js';
-                    script.onload = () => resolve();
-                    script.onerror = () => reject(new Error('Falha ao carregar biblioteca HEIC'));
-                    document.head.appendChild(script);
                 });
             }
 
+            // ============ CARREGAR IMAGEM ============
             function isHeicFile(file) {
                 const name = file.name.toLowerCase();
                 const type = file.type.toLowerCase();
@@ -1146,12 +1143,11 @@
 
             function isImageFile(file) {
                 const name = file.name.toLowerCase();
-                const extensions = ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.webp', '.tiff', '.tif', '.svg', '.ico', '.avif', '.heic', '.heif'];
+                const extensions = ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.webp', '.tiff', '.tif', '.heic', '.heif'];
                 const type = file.type.toLowerCase();
                 return extensions.some(ext => name.endsWith(ext)) || type.startsWith('image/');
             }
 
-            // ============ CARREGAR IMAGEM ============
             function loadImageFromFile(file) {
                 return new Promise((resolve, reject) => {
                     const reader = new FileReader();
@@ -1187,15 +1183,12 @@
 
                 if (files.length === 0) return;
 
-                state.isConverting = true;
-                processBtn.disabled = true;
                 let processed = 0;
                 let total = files.length;
                 let successCount = 0;
 
                 for (const file of files) {
                     try {
-                        // Verificar se é uma imagem
                         if (!isImageFile(file)) {
                             showToast(`"${file.name}" não é uma imagem suportada`, 'warning');
                             processed++;
@@ -1205,26 +1198,28 @@
 
                         let imageFile = file;
                         let isHeic = false;
+                        let conversionMethod = 'nativo';
 
-                        // Verificar se é HEIC/HEIF e converter
                         if (isHeicFile(file)) {
                             isHeic = true;
                             showToast(`Convertendo ${file.name}...`, 'info');
+                            
                             try {
-                                imageFile = await convertHeicToJpeg(file);
-                                showToast(`${file.name} convertido com sucesso!`, 'success');
+                                // Tentar método do canvas
+                                imageFile = await convertHeicWithCanvas(file);
+                                conversionMethod = 'canvas';
+                                showToast(`${file.name} convertido com sucesso! (canvas)`, 'success');
                             } catch (error) {
                                 showToast(`Erro ao converter ${file.name}: ${error.message}`, 'error');
+                                heicWarning.classList.add('show');
                                 processed++;
                                 updateProgress(processed, total);
                                 continue;
                             }
                         }
 
-                        // Carregar a imagem
                         const result = await loadImageFromFile(imageFile);
                         
-                        // Verificar se é uma imagem válida
                         if (result.width === 0 || result.height === 0) {
                             showToast(`"${file.name}" parece ser uma imagem inválida`, 'warning');
                             processed++;
@@ -1247,7 +1242,8 @@
                             imgElement: result.img,
                             isHeic: isHeic,
                             format: format,
-                            extension: extension
+                            extension: extension,
+                            conversionMethod: conversionMethod
                         });
 
                         state.totalSize += imageFile.size;
@@ -1267,7 +1263,6 @@
                     }
                 }
 
-                state.isConverting = false;
                 updateCounters();
                 
                 if (successCount > 0) {
@@ -1335,7 +1330,7 @@
                 state.photos.forEach((photo, index) => {
                     const item = document.createElement('div');
                     item.className = 'photo-item';
-                    const formatClass = getFormatClass(photo.extension);
+                    const formatClass = photo.extension === 'heic' || photo.extension === 'heif' ? 'heic' : 'jpg';
                     item.innerHTML = `
                         <img src="${photo.url}" class="photo-thumb" alt="${photo.name}">
                         <div class="photo-info">
@@ -1414,23 +1409,13 @@
                     return;
                 }
 
-                state.isProcessing = true;
-                processBtn.disabled = true;
-                processBtn.innerHTML = '<span class="spinner"></span> Processando...';
-
                 state.totalPages = Math.ceil(state.photos.length / state.photosPerPage);
                 state.currentPage = 0;
-
-                setTimeout(() => {
-                    state.isProcessing = false;
-                    processBtn.disabled = false;
-                    processBtn.innerHTML = '<i class="fas fa-play"></i> Processar';
-                    
-                    renderPreview();
-                    updateCounters();
-                    downloadBtn.disabled = false;
-                    showToast(`${state.photos.length} fotos processadas em ${state.totalPages} páginas!`, 'success');
-                }, 500);
+                
+                renderPreview();
+                updateCounters();
+                downloadBtn.disabled = false;
+                showToast(`${state.photos.length} fotos processadas em ${state.totalPages} páginas!`, 'success');
             }
 
             // ============ NAVEGAÇÃO ============
@@ -1537,7 +1522,6 @@
                             doc.text(`PB-CROMA PRO - Página ${p + 1}/${totalPages}`, margin, margin + 5);
                             doc.text(`Foto: ${photo.name}`, margin, margin + 10);
                             doc.text(`18 × 26 cm com marcas de corte`, margin, margin + 15);
-                            doc.text(`Formato: ${photo.format}${photo.isHeic ? ' (convertido HEIC)' : ''}`, margin, margin + 20);
                         }
                     }
 
@@ -1553,7 +1537,7 @@
                 }
             }
 
-            // ============ EXPOR FUNÇÕES GLOBAIS ============
+            // ============ EXPOR FUNÇÕES ============
             window.removePhoto = removePhoto;
             window.rotatePhoto = rotatePhoto;
 
@@ -1598,34 +1582,17 @@
                 if (e.key === 'ArrowRight') goToNextPage();
             });
 
-            // ============ VERIFICAR SUPORTE HEIC ============
-            function checkHeicSupport() {
-                const supportEl = document.getElementById('formatSupport');
-                if (typeof heic2any !== 'undefined') {
-                    supportEl.textContent = '✅ HEIC/HEIF suportado';
-                    supportEl.style.color = '#10b981';
-                } else {
-                    supportEl.textContent = '🔄 HEIC/HEIF com conversão automática';
-                    supportEl.style.color = '#f59e0b';
-                    loadHeicLibrary().catch(() => {
-                        console.warn('Biblioteca HEIC não carregada automaticamente');
-                    });
-                }
-            }
-
             // ============ INICIALIZAÇÃO ============
             updateCounters();
             updatePageControls();
             clearPreview();
-            checkHeicSupport();
 
             console.log('PB-CROMA PRO inicializado!');
             console.log(`- Fotos: 18 × 26 cm`);
             console.log(`- Máximo: ${state.maxPhotos} fotos`);
             console.log(`- Formato: A4 Landscape`);
             console.log(`- Marcas de corte: Cruzetas nos cantos`);
-            console.log(`- Suporte HEIC/HEIF: ${typeof heic2any !== 'undefined' ? '✅ Sim' : '🔄 Carregando...'}`);
-            console.log(`- Formatos suportados: HEIC, HEIF, JPEG, PNG, WEBP, BMP, GIF, TIFF, SVG, ICO, AVIF`);
+            console.log(`- Conversão HEIC: Método Canvas (fallback)`);
         });
     </script>
 </body>
