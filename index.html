@@ -6,6 +6,7 @@
     <title>PB-CROMA PRO - Editor de Fotos 18×26cm com Marcas de Corte</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -88,6 +89,10 @@
             color: #4cc9f0;
         }
 
+        .header-info .badge i {
+            margin-right: 5px;
+        }
+
         .main-grid {
             display: grid;
             grid-template-columns: 1fr 2fr;
@@ -142,6 +147,22 @@
         .upload-area p {
             color: #94a3b8;
             margin-bottom: 10px;
+        }
+
+        .upload-area .formats {
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-top: 10px;
+        }
+
+        .upload-area .formats span {
+            display: inline-block;
+            background: rgba(76, 201, 240, 0.1);
+            padding: 2px 10px;
+            border-radius: 12px;
+            margin: 3px;
+            font-size: 0.75rem;
+            border: 1px solid rgba(76, 201, 240, 0.15);
         }
 
         .btn {
@@ -206,6 +227,22 @@
             transform: none !important;
         }
 
+        .btn .spinner {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 0.8s ease-in-out infinite;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
         .hidden {
             display: none !important;
         }
@@ -257,6 +294,7 @@
             object-fit: cover;
             border-radius: 8px;
             flex-shrink: 0;
+            background: #1a1a2e;
         }
 
         .photo-info {
@@ -435,7 +473,6 @@
             background: #000;
         }
 
-        /* Canto Superior Esquerdo */
         .cut-marks .corner.tl {
             top: 5px;
             left: 5px;
@@ -453,7 +490,6 @@
             left: 0;
         }
 
-        /* Canto Superior Direito */
         .cut-marks .corner.tr {
             top: 5px;
             right: 5px;
@@ -471,7 +507,6 @@
             right: 0;
         }
 
-        /* Canto Inferior Esquerdo */
         .cut-marks .corner.bl {
             bottom: 5px;
             left: 5px;
@@ -489,7 +524,6 @@
             left: 0;
         }
 
-        /* Canto Inferior Direito */
         .cut-marks .corner.br {
             bottom: 5px;
             right: 5px;
@@ -507,7 +541,6 @@
             right: 0;
         }
 
-        /* Linhas de sangria (opcional) */
         .cut-marks .bleed {
             position: absolute;
             border: 1px dashed rgba(0, 0, 0, 0.2);
@@ -578,20 +611,30 @@
             background: linear-gradient(135deg, #3b82f6, #1d4ed8);
         }
 
-        .loading-spinner {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            border-top-color: #fff;
-            animation: spin 0.8s ease-in-out infinite;
-            margin-right: 10px;
-            vertical-align: middle;
+        .toast.warning {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
         }
 
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 2px;
+            margin-top: 10px;
+            overflow: hidden;
+            display: none;
+        }
+
+        .progress-bar .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3a0ca3, #4cc9f0);
+            width: 0%;
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .progress-bar.active {
+            display: block;
         }
 
         footer {
@@ -681,6 +724,7 @@
                 <span class="badge"><i class="fas fa-crop-alt"></i> 18 × 26 cm</span>
                 <span class="badge"><i class="fas fa-cut"></i> Marcas de Registro</span>
                 <span class="badge"><i class="fas fa-images"></i> Até 200 Fotos</span>
+                <span class="badge"><i class="fas fa-file-image"></i> HEIC/HEIF/PNG/JPG/WEBP/BMP</span>
             </div>
         </header>
 
@@ -696,10 +740,28 @@
                     <p style="font-size: 0.85rem;">ou</p>
                     <input type="file" id="fileInput" accept="image/*" multiple class="hidden">
                     <button class="btn btn-primary" id="browseBtn"><i class="fas fa-folder-open"></i> Selecionar Fotos</button>
+                    <div class="formats">
+                        <span>HEIC</span>
+                        <span>HEIF</span>
+                        <span>JPEG</span>
+                        <span>PNG</span>
+                        <span>WEBP</span>
+                        <span>BMP</span>
+                        <span>GIF</span>
+                        <span>TIFF</span>
+                        <span>SVG</span>
+                    </div>
+                </div>
+
+                <div class="progress-bar" id="progressBar">
+                    <div class="progress-fill" id="progressFill"></div>
                 </div>
 
                 <div class="photo-list" id="photoList">
-                    <p style="text-align: center; color: #64748b; padding: 20px;">Nenhuma foto selecionada</p>
+                    <p style="text-align: center; color: #64748b; padding: 20px;">
+                        <i class="fas fa-inbox" style="font-size: 2rem; display: block; margin-bottom: 10px;"></i>
+                        Nenhuma foto selecionada
+                    </p>
                 </div>
 
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
@@ -726,6 +788,7 @@
                                 <div class="photo-placeholder">
                                     <i class="fas fa-image" style="font-size: 3rem; color: #cbd5e1; display: block; margin-bottom: 10px;"></i>
                                     <span>Adicione uma foto</span>
+                                    <p style="font-size: 0.8rem; color: #94a3b8; margin-top: 8px;">Formatos: HEIC, HEIF, JPG, PNG, WEBP, BMP, GIF, TIFF</p>
                                 </div>
                             </div>
                         </div>
@@ -746,6 +809,7 @@
                         <span><i class="fas fa-images"></i> <strong id="totalPhotos">0</strong> fotos</span>
                         <span><i class="fas fa-file-pdf"></i> <strong id="totalPages">0</strong> páginas</span>
                         <span><i class="fas fa-arrows-alt"></i> <strong>18 × 26 cm</strong></span>
+                        <span><i class="fas fa-check-circle" style="color: #10b981;"></i> <span id="formatSupport">HEIC/HEIF suportado</span></span>
                     </div>
                     <div>
                         <button class="btn btn-primary" id="downloadBtn" disabled>
@@ -761,6 +825,8 @@
                 <h2><i class="fas fa-info-circle"></i> Instruções</h2>
                 <ol style="color: #94a3b8; line-height: 2; padding-left: 20px;">
                     <li>Selecione até <strong>200 fotos</strong> usando o botão ou arrastando</li>
+                    <li>Formatos suportados: <strong>HEIC, HEIF, JPG, PNG, WEBP, BMP, GIF, TIFF</strong></li>
+                    <li>Fotos HEIC/HEIF são <strong>convertidas automaticamente</strong></li>
                     <li>Clique em <strong>"Processar"</strong> para organizar as fotos</li>
                     <li>Cada foto será ajustada para <strong>18 × 26 cm</strong></li>
                     <li>As <strong>marcas de registro</strong> serão adicionadas nos cantos</li>
@@ -775,6 +841,7 @@
                     <li>✂️ <strong>Marcas de corte:</strong> Cruzetas nos 4 cantos</li>
                     <li>📏 <strong>Sangria:</strong> 3 mm (linha pontilhada)</li>
                     <li>🖼️ <strong>Fotos por página:</strong> 1 (tamanho cheio)</li>
+                    <li>🔄 <strong>Conversão HEIC:</strong> Automática para JPEG</li>
                 </ul>
             </div>
         </div>
@@ -804,7 +871,8 @@
                 photoHeight: 260, // mm
                 pageWidth: 297, // mm (A4 landscape)
                 pageHeight: 210, // mm (A4 landscape)
-                isProcessing: false
+                isProcessing: false,
+                isConverting: false
             };
 
             // ============ DOM ELEMENTOS ============
@@ -825,6 +893,8 @@
             const totalPhotos = document.getElementById('totalPhotos');
             const totalPages = document.getElementById('totalPages');
             const toast = document.getElementById('toast');
+            const progressBar = document.getElementById('progressBar');
+            const progressFill = document.getElementById('progressFill');
 
             // ============ FUNÇÕES DE UTILIDADE ============
             function showToast(message, type = 'info') {
@@ -850,7 +920,7 @@
                 photoCounter.textContent = `${count} / ${state.maxPhotos}`;
                 totalPhotos.textContent = count;
                 totalPages.textContent = state.totalPages || 0;
-                processBtn.disabled = count === 0;
+                processBtn.disabled = count === 0 || state.isConverting;
                 downloadBtn.disabled = count === 0 || state.totalPages === 0;
             }
 
@@ -865,52 +935,177 @@
                     'Página 1';
             }
 
-            // ============ GERENCIAMENTO DE FOTOS ============
-            function addPhotos(files) {
+            function updateProgress(value, total) {
+                const percent = total > 0 ? (value / total) * 100 : 0;
+                progressFill.style.width = Math.min(percent, 100) + '%';
+                if (value >= total && total > 0) {
+                    setTimeout(() => {
+                        progressBar.classList.remove('active');
+                    }, 500);
+                } else {
+                    progressBar.classList.add('active');
+                }
+            }
+
+            // ============ CONVERSOR DE HEIC/HEIF ============
+            async function convertHeicToJpeg(file) {
+                try {
+                    // Verificar se a biblioteca está disponível
+                    if (typeof heic2any === 'undefined') {
+                        console.warn('heic2any não carregado, tentando carregar...');
+                        // Tentar carregar dinamicamente
+                        await loadHeicLibrary();
+                    }
+
+                    // Converter para JPEG
+                    const result = await heic2any({
+                        blob: file,
+                        toType: 'image/jpeg',
+                        quality: 0.92
+                    });
+
+                    // Criar novo arquivo a partir do blob convertido
+                    const convertedFile = new File(
+                        [result], 
+                        file.name.replace(/\.(heic|heif|HEIC|HEIF)$/i, '.jpg'),
+                        { type: 'image/jpeg' }
+                    );
+
+                    return convertedFile;
+                } catch (error) {
+                    console.error('Erro ao converter HEIC:', error);
+                    throw new Error(`Não foi possível converter o arquivo ${file.name}: ${error.message}`);
+                }
+            }
+
+            async function loadHeicLibrary() {
+                return new Promise((resolve, reject) => {
+                    if (typeof heic2any !== 'undefined') {
+                        resolve();
+                        return;
+                    }
+
+                    const script = document.createElement('script');
+                    script.src = 'https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js';
+                    script.onload = () => resolve();
+                    script.onerror = () => reject(new Error('Falha ao carregar biblioteca HEIC'));
+                    document.head.appendChild(script);
+                });
+            }
+
+            // ============ VERIFICAR SE É HEIC/HEIF ============
+            function isHeicFile(file) {
+                const name = file.name.toLowerCase();
+                const type = file.type.toLowerCase();
+                return name.endsWith('.heic') || 
+                       name.endsWith('.heif') ||
+                       type === 'image/heic' ||
+                       type === 'image/heif';
+            }
+
+            // ============ CARREGAR IMAGEM ============
+            function loadImageFromFile(file) {
+                return new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const img = new Image();
+                        img.onload = function() {
+                            resolve({
+                                url: e.target.result,
+                                img: img,
+                                width: img.width,
+                                height: img.height
+                            });
+                        };
+                        img.onerror = function() {
+                            reject(new Error(`Não foi possível carregar a imagem ${file.name}`));
+                        };
+                        img.src = e.target.result;
+                    };
+                    reader.onerror = function() {
+                        reject(new Error(`Erro ao ler o arquivo ${file.name}`));
+                    };
+                    reader.readAsDataURL(file);
+                });
+            }
+
+            // ============ ADICIONAR FOTOS ============
+            async function addPhotos(files) {
                 const remaining = state.maxPhotos - state.photos.length;
                 if (files.length > remaining) {
                     showToast(`Só é possível adicionar mais ${remaining} foto(s)`, 'error');
                     files = Array.from(files).slice(0, remaining);
                 }
 
-                let loaded = 0;
-                const total = files.length;
+                if (files.length === 0) return;
 
-                if (total === 0) return;
+                state.isConverting = true;
+                processBtn.disabled = true;
+                let processed = 0;
+                let total = files.length;
 
-                Array.from(files).forEach(file => {
-                    if (!file.type.match('image.*')) {
-                        showToast(`"${file.name}" não é uma imagem válida`, 'error');
-                        return;
-                    }
-
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        const img = new Image();
-                        img.onload = function() {
-                            state.photos.push({
-                                id: Date.now() + '_' + Math.random().toString(36).substr(2, 6),
-                                name: file.name,
-                                size: file.size,
-                                url: e.target.result,
-                                width: img.width,
-                                height: img.height,
-                                rotation: 0,
-                                imgElement: img
-                            });
-                            loaded++;
-                            if (loaded === total) {
-                                renderPhotoList();
-                                updateCounters();
-                                showToast(`${loaded} foto(s) adicionada(s) com sucesso!`, 'success');
+                for (const file of files) {
+                    try {
+                        let imageFile = file;
+                        
+                        // Verificar se é HEIC/HEIF e converter
+                        if (isHeicFile(file)) {
+                            showToast(`Convertendo ${file.name}...`, 'info');
+                            try {
+                                imageFile = await convertHeicToJpeg(file);
+                                showToast(`${file.name} convertido com sucesso!`, 'success');
+                            } catch (error) {
+                                showToast(`Erro ao converter ${file.name}: ${error.message}`, 'error');
+                                processed++;
+                                updateProgress(processed, total);
+                                continue;
                             }
-                        };
-                        img.src = e.target.result;
-                    };
-                    reader.readAsDataURL(file);
-                });
+                        }
+
+                        // Carregar a imagem
+                        const result = await loadImageFromFile(imageFile);
+                        
+                        state.photos.push({
+                            id: Date.now() + '_' + Math.random().toString(36).substr(2, 6),
+                            name: imageFile.name,
+                            originalName: file.name,
+                            size: imageFile.size,
+                            url: result.url,
+                            width: result.width,
+                            height: result.height,
+                            rotation: 0,
+                            imgElement: result.img,
+                            isHeic: isHeicFile(file)
+                        });
+
+                        processed++;
+                        updateProgress(processed, total);
+                        renderPhotoList();
+                        updateCounters();
+
+                    } catch (error) {
+                        console.error('Erro ao processar arquivo:', error);
+                        showToast(`Erro ao processar ${file.name}: ${error.message}`, 'error');
+                        processed++;
+                        updateProgress(processed, total);
+                    }
+                }
+
+                state.isConverting = false;
+                updateCounters();
+                
+                if (state.photos.length > 0) {
+                    showToast(`${state.photos.length} foto(s) adicionada(s) com sucesso!`, 'success');
+                }
+
+                // Resetar progresso
+                setTimeout(() => {
+                    progressBar.classList.remove('active');
+                    progressFill.style.width = '0%';
+                }, 1000);
             }
 
+            // ============ REMOVER FOTO ============
             function removePhoto(index) {
                 state.photos.splice(index, 1);
                 renderPhotoList();
@@ -926,6 +1121,7 @@
                 showToast('Foto removida', 'info');
             }
 
+            // ============ LIMPAR TUDO ============
             function clearAllPhotos() {
                 if (state.photos.length === 0) return;
                 if (confirm('Tem certeza que deseja remover todas as fotos?')) {
@@ -941,7 +1137,7 @@
                 }
             }
 
-            // ============ RENDERIZAÇÃO ============
+            // ============ RENDERIZAR LISTA ============
             function renderPhotoList() {
                 if (state.photos.length === 0) {
                     photoList.innerHTML = `
@@ -960,7 +1156,10 @@
                     item.innerHTML = `
                         <img src="${photo.url}" class="photo-thumb" alt="${photo.name}">
                         <div class="photo-info">
-                            <div class="photo-name">${photo.name}</div>
+                            <div class="photo-name">
+                                ${photo.name}
+                                ${photo.isHeic ? '<span style="font-size:0.7rem; background:#3a0ca3; padding:2px 8px; border-radius:10px; margin-left:5px;">HEIC</span>' : ''}
+                            </div>
                             <div class="photo-size">${formatFileSize(photo.size)} · ${photo.width}×${photo.height}px</div>
                         </div>
                         <div class="photo-actions">
@@ -976,11 +1175,13 @@
                 });
             }
 
+            // ============ PREVIEW ============
             function clearPreview() {
                 photoSlot.innerHTML = `
                     <div class="photo-placeholder">
                         <i class="fas fa-image" style="font-size: 3rem; color: #cbd5e1; display: block; margin-bottom: 10px;"></i>
                         <span>Adicione uma foto</span>
+                        <p style="font-size: 0.8rem; color: #94a3b8; margin-top: 8px;">Formatos: HEIC, HEIF, JPG, PNG, WEBP, BMP, GIF, TIFF</p>
                     </div>
                 `;
                 photoSlot.className = 'photo-slot empty';
@@ -1013,7 +1214,16 @@
                 updatePageControls();
             }
 
-            // ============ PROCESSAMENTO ============
+            // ============ ROTAÇÃO ============
+            function rotatePhoto(index) {
+                if (state.photos[index]) {
+                    state.photos[index].rotation = (state.photos[index].rotation || 0) + 90;
+                    renderPhotoList();
+                    renderPreview();
+                }
+            }
+
+            // ============ PROCESSAR ============
             function processPhotos() {
                 if (state.photos.length === 0) {
                     showToast('Nenhuma foto para processar', 'error');
@@ -1022,13 +1232,11 @@
 
                 state.isProcessing = true;
                 processBtn.disabled = true;
-                processBtn.innerHTML = '<span class="loading-spinner"></span> Processando...';
+                processBtn.innerHTML = '<span class="spinner"></span> Processando...';
 
-                // Calcular páginas (1 foto por página)
                 state.totalPages = Math.ceil(state.photos.length / state.photosPerPage);
                 state.currentPage = 0;
 
-                // Simular processamento
                 setTimeout(() => {
                     state.isProcessing = false;
                     processBtn.disabled = false;
@@ -1056,15 +1264,6 @@
                 }
             }
 
-            // ============ ROTAÇÃO ============
-            function rotatePhoto(index) {
-                if (state.photos[index]) {
-                    state.photos[index].rotation = (state.photos[index].rotation || 0) + 90;
-                    renderPhotoList();
-                    renderPreview();
-                }
-            }
-
             // ============ GERAR PDF ============
             async function generatePDF() {
                 if (state.photos.length === 0 || state.totalPages === 0) {
@@ -1073,7 +1272,7 @@
                 }
 
                 downloadBtn.disabled = true;
-                downloadBtn.innerHTML = '<span class="loading-spinner"></span> Gerando PDF...';
+                downloadBtn.innerHTML = '<span class="spinner"></span> Gerando PDF...';
 
                 try {
                     if (typeof window.jspdf === 'undefined') {
@@ -1087,13 +1286,12 @@
                         format: 'a4'
                     });
 
-                    const margin = 5; // mm
-                    const photoW = 180; // 18cm
-                    const photoH = 260; // 26cm
+                    const margin = 5;
+                    const photoW = 180;
+                    const photoH = 260;
                     const pageW = 297;
                     const pageH = 210;
 
-                    // Calcular posição centralizada
                     const x = (pageW - photoW) / 2;
                     const y = (pageH - photoH) / 2;
 
@@ -1108,7 +1306,6 @@
                         const photo = state.photos[photoIndex];
 
                         if (photo) {
-                            // Adicionar a imagem
                             const rotation = photo.rotation || 0;
                             
                             if (rotation !== 0) {
@@ -1121,7 +1318,7 @@
                                 doc.rotate(-rotation, { origin: [x + photoW/2, y + photoH/2] });
                             }
 
-                            // ADICIONAR MARCAS DE REGISTRO/CORTE
+                            // MARCAS DE REGISTRO/CORTE
                             const markSize = 12;
                             const markOffset = 3;
                             const lineWidth = 0.5;
@@ -1129,15 +1326,11 @@
                             doc.setDrawColor(0);
                             doc.setLineWidth(lineWidth);
 
-                            // Função para desenhar uma cruzeta
                             function drawCross(cx, cy, size) {
-                                // Linha horizontal
                                 doc.line(cx - size/2, cy, cx + size/2, cy);
-                                // Linha vertical
                                 doc.line(cx, cy - size/2, cx, cy + size/2);
                             }
 
-                            // Cantos
                             const corners = [
                                 { x: x - markOffset, y: y - markOffset },
                                 { x: x + photoW + markOffset, y: y - markOffset },
@@ -1149,19 +1342,12 @@
                                 drawCross(corner.x, corner.y, markSize);
                             });
 
-                            // Linhas de sangria (3mm)
                             doc.setDrawColor(128, 128, 128);
                             doc.setLineWidth(0.3);
                             doc.setLineDashPattern([2, 2], 0);
-                            doc.rect(
-                                x - 3, 
-                                y - 3, 
-                                photoW + 6, 
-                                photoH + 6
-                            );
+                            doc.rect(x - 3, y - 3, photoW + 6, photoH + 6);
                             doc.setLineDashPattern([], 0);
 
-                            // Texto informativo
                             doc.setFontSize(8);
                             doc.setTextColor(150);
                             doc.text(`PB-CROMA PRO - Página ${p + 1}/${totalPages}`, margin, margin + 5);
@@ -1182,7 +1368,7 @@
                 }
             }
 
-            // ============ EXPOR FUNÇÕES PARA O GLOBAL ============
+            // ============ EXPOR FUNÇÕES GLOBAIS ============
             window.removePhoto = removePhoto;
             window.rotatePhoto = rotatePhoto;
 
@@ -1222,22 +1408,40 @@
             prevPageBtn.addEventListener('click', goToPrevPage);
             nextPageBtn.addEventListener('click', goToNextPage);
 
-            // Atalhos de teclado
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'ArrowLeft') goToPrevPage();
                 if (e.key === 'ArrowRight') goToNextPage();
             });
 
+            // ============ VERIFICAR SUPORTE HEIC ============
+            function checkHeicSupport() {
+                const supportEl = document.getElementById('formatSupport');
+                if (typeof heic2any !== 'undefined') {
+                    supportEl.textContent = '✅ HEIC/HEIF suportado';
+                    supportEl.style.color = '#10b981';
+                } else {
+                    supportEl.textContent = '🔄 HEIC/HEIF suportado com conversão';
+                    supportEl.style.color = '#f59e0b';
+                    // Tentar carregar a biblioteca
+                    loadHeicLibrary().catch(() => {
+                        console.warn('Biblioteca HEIC não carregada automaticamente');
+                    });
+                }
+            }
+
             // ============ INICIALIZAÇÃO ============
             updateCounters();
             updatePageControls();
             clearPreview();
+            checkHeicSupport();
 
             console.log('PB-CROMA PRO inicializado!');
             console.log(`- Fotos: 18 × 26 cm`);
             console.log(`- Máximo: ${state.maxPhotos} fotos`);
             console.log(`- Formato: A4 Landscape`);
             console.log(`- Marcas de corte: Cruzetas nos cantos`);
+            console.log(`- Suporte HEIC/HEIF: ${typeof heic2any !== 'undefined' ? '✅ Sim' : '🔄 Carregando...'}`);
+            console.log(`- Formatos suportados: HEIC, HEIF, JPEG, PNG, WEBP, BMP, GIF, TIFF, SVG`);
         });
     </script>
 </body>
