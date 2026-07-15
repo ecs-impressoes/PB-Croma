@@ -3,22 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PB-CROMA PRO - Editor de Fotos 26×18cm | Upload de 200 Fotos</title>
-    <meta name="description" content="Editor profissional de fotos para impressão em 26x18cm com marcas de corte. Upload de até 200 fotos de uma vez. Suporte HEIC, JPG, PNG, WEBP.">
-    <meta name="keywords" content="editor de fotos, impressão 26x18cm, marcas de corte, HEIC, upload 200 fotos, fotos para impressão">
+    <title>PB-CROMA PRO - Editor de Fotos 27x19cm | Corte 26x18cm</title>
+    <meta name="description" content="Editor profissional de fotos para impressão com sangria 27x19cm e linha de corte 26x18cm. Upload de até 200 fotos. Suporte HEIC, JPG, PNG, WEBP.">
+    <meta name="keywords" content="editor de fotos, impressão 27x19cm, linha de corte 26x18cm, sangria, HEIC, upload 200 fotos">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://pibbaweb1.github.io/pb-croma-pro/">
     
-    <!-- Open Graph -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="PB-CROMA PRO - Editor de Fotos 26×18cm">
-    <meta property="og:description" content="Editor profissional de fotos para impressão em 26x18cm. Upload de até 200 fotos de uma vez.">
+    <meta property="og:title" content="PB-CROMA PRO - Editor de Fotos 27x19cm | Corte 26x18cm">
+    <meta property="og:description" content="Editor profissional de fotos com sangria 27x19cm e linha de corte 26x18cm. Upload de até 200 fotos.">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     
     <style>
-        /* ===== RESET ===== */
         * {
             margin: 0;
             padding: 0;
@@ -38,7 +36,6 @@
             padding: 20px;
         }
 
-        /* ===== HEADER ===== */
         header {
             display: flex;
             justify-content: space-between;
@@ -104,7 +101,11 @@
             white-space: nowrap;
         }
 
-        /* ===== GRID ===== */
+        .header-info .badge.cut {
+            border-color: rgba(239, 68, 68, 0.3);
+            color: #f87171;
+        }
+
         .main-grid {
             display: grid;
             grid-template-columns: 1fr 2fr;
@@ -117,7 +118,6 @@
             }
         }
 
-        /* ===== CARDS ===== */
         .card {
             background: rgba(30, 41, 59, 0.7);
             backdrop-filter: blur(10px);
@@ -136,7 +136,6 @@
             flex-wrap: wrap;
         }
 
-        /* ===== UPLOAD AREA ===== */
         .upload-area {
             border: 2px dashed #475569;
             border-radius: 12px;
@@ -192,7 +191,6 @@
             color: #f87171;
         }
 
-        /* ===== BOTÕES ===== */
         .btn {
             display: inline-block;
             padding: 10px 20px;
@@ -235,11 +233,6 @@
             transform: translateY(-2px);
         }
 
-        .btn-full {
-            width: 100%;
-            margin-top: 8px;
-        }
-
         .btn:disabled {
             opacity: 0.5;
             cursor: not-allowed;
@@ -266,7 +259,6 @@
             display: none !important;
         }
 
-        /* ===== CONTADOR ===== */
         .photo-counter {
             background: linear-gradient(135deg, #3a0ca3, #4361ee);
             color: white;
@@ -276,7 +268,6 @@
             margin-left: 8px;
         }
 
-        /* ===== LISTA DE FOTOS ===== */
         .photo-list {
             max-height: 200px;
             overflow-y: auto;
@@ -383,7 +374,6 @@
             border-color: #4cc9f0;
         }
 
-        /* ===== PROGRESS BAR ===== */
         .progress-bar {
             width: 100%;
             height: 4px;
@@ -406,7 +396,6 @@
             display: block;
         }
 
-        /* ===== PREVIEW - PÁGINA VERTICAL ===== */
         .preview-container {
             position: relative;
         }
@@ -463,7 +452,6 @@
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        /* Página VERTICAL (Retrato) - A4 */
         .a4-page {
             background: white;
             width: 100%;
@@ -534,7 +522,7 @@
             margin-top: 5px;
         }
 
-        /* ===== MARCAS DE CORTE - VERTICAL ===== */
+        /* ===== MARCAS DE CORTE - COM SANGRA ===== */
         .cut-marks {
             position: absolute;
             top: 0;
@@ -558,7 +546,6 @@
             background: #000;
         }
 
-        /* Superior Esquerdo */
         .cut-marks .corner.tl {
             top: 4px;
             left: 4px;
@@ -576,7 +563,6 @@
             left: 0;
         }
 
-        /* Superior Direito */
         .cut-marks .corner.tr {
             top: 4px;
             right: 4px;
@@ -594,7 +580,6 @@
             right: 0;
         }
 
-        /* Inferior Esquerdo */
         .cut-marks .corner.bl {
             bottom: 4px;
             left: 4px;
@@ -612,7 +597,6 @@
             left: 0;
         }
 
-        /* Inferior Direito */
         .cut-marks .corner.br {
             bottom: 4px;
             right: 4px;
@@ -630,9 +614,22 @@
             right: 0;
         }
 
+        /* Linha de CORTE (26x18cm) - Vermelha para destacar */
+        .cut-marks .cut-line {
+            position: absolute;
+            border: 1px solid #ef4444;
+            top: 5%;
+            left: 7%;
+            right: 7%;
+            bottom: 5%;
+            pointer-events: none;
+            opacity: 0.7;
+        }
+
+        /* Linha de SANGRA (27x19cm) - Cinza pontilhada */
         .cut-marks .bleed {
             position: absolute;
-            border: 1px dashed rgba(0, 0, 0, 0.15);
+            border: 1px dashed rgba(128, 128, 128, 0.5);
             top: 3mm;
             left: 3mm;
             right: 3mm;
@@ -640,7 +637,6 @@
             pointer-events: none;
         }
 
-        /* ===== STATUS BAR ===== */
         .status-bar {
             display: flex;
             justify-content: space-between;
@@ -668,7 +664,10 @@
             color: #e2e8f0;
         }
 
-        /* ===== STATS GRID ===== */
+        .status-bar .info .cut-info {
+            color: #f87171;
+        }
+
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -700,7 +699,6 @@
             }
         }
 
-        /* ===== TOAST ===== */
         .toast {
             position: fixed;
             bottom: 20px;
@@ -736,7 +734,6 @@
             background: linear-gradient(135deg, #f59e0b, #d97706);
         }
 
-        /* ===== HEIC WARNING ===== */
         .heic-warning {
             background: rgba(239, 68, 68, 0.1);
             border: 1px solid rgba(239, 68, 68, 0.2);
@@ -764,7 +761,6 @@
             color: #4cc9f0;
         }
 
-        /* ===== FOOTER ===== */
         footer {
             margin-top: 30px;
             padding: 15px;
@@ -797,7 +793,37 @@
             transform: translateY(-2px);
         }
 
-        /* ===== RESPONSIVO ===== */
+        .spec-box {
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 8px;
+            padding: 12px 15px;
+            margin-top: 10px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .spec-box .spec-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.8rem;
+            color: #94a3b8;
+        }
+
+        .spec-box .spec-item .label {
+            color: #64748b;
+        }
+
+        .spec-box .spec-item .value {
+            color: #e2e8f0;
+            font-weight: 600;
+        }
+
+        .spec-box .spec-item .value.cut {
+            color: #f87171;
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 10px;
@@ -847,31 +873,32 @@
                 font-size: 0.65rem;
                 padding: 4px 8px;
             }
+
+            .spec-box {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- ===== HEADER ===== -->
         <header>
             <div class="logo-container">
                 <div class="logo" aria-hidden="true">PB</div>
                 <div class="logo-text">
                     <h1>PB-CROMA PRO</h1>
-                    <p>Editor de Fotos 26×18cm com Marcas de Corte</p>
+                    <p>Editor de Fotos com Sangria 27x19cm | Corte 26x18cm</p>
                 </div>
             </div>
             <div class="header-info">
-                <span class="badge"><i class="fas fa-crop-alt"></i> 26×18 cm</span>
-                <span class="badge"><i class="fas fa-cut"></i> Marcas de Corte</span>
+                <span class="badge"><i class="fas fa-crop-alt"></i> 27×19 cm</span>
+                <span class="badge cut"><i class="fas fa-cut"></i> Corte 26×18 cm</span>
                 <span class="badge"><i class="fas fa-images"></i> 200 Fotos</span>
                 <span class="badge"><i class="fas fa-arrow-up"></i> Vertical</span>
             </div>
         </header>
 
-        <!-- ===== CONTEÚDO ===== -->
         <div class="main-grid">
-            <!-- Painel Esquerdo -->
             <div class="card">
                 <h2>
                     <i class="fas fa-upload"></i> Importar Fotos
@@ -898,6 +925,25 @@
                         <span>BMP</span>
                         <span>GIF</span>
                         <span>TIFF</span>
+                    </div>
+                </div>
+
+                <div class="spec-box">
+                    <div class="spec-item">
+                        <span class="label">📐 Com Sangria:</span>
+                        <span class="value">27 × 19 cm</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="label">✂️ Linha de Corte:</span>
+                        <span class="value cut">26 × 18 cm</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="label">📄 Página:</span>
+                        <span class="value">A4 Vertical</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="label">📦 Máximo:</span>
+                        <span class="value">200 fotos</span>
                     </div>
                 </div>
 
@@ -942,7 +988,6 @@
                 </div>
             </div>
 
-            <!-- Painel Direito - Pré-visualização VERTICAL -->
             <div class="card preview-container">
                 <div class="preview-toolbar">
                     <h2 style="margin: 0; font-size: 1.1rem;">
@@ -973,6 +1018,7 @@
                             <div class="corner bl"></div>
                             <div class="corner br"></div>
                             <div class="bleed"></div>
+                            <div class="cut-line" id="cutLine"></div>
                         </div>
                     </div>
                 </div>
@@ -981,7 +1027,8 @@
                     <div class="info">
                         <span><i class="fas fa-images"></i> <strong id="totalPhotos">0</strong> fotos</span>
                         <span><i class="fas fa-file-pdf"></i> <strong id="totalPages">0</strong> páginas</span>
-                        <span><i class="fas fa-arrows-alt-h"></i> <strong>26×18 cm</strong></span>
+                        <span><i class="fas fa-arrows-alt-h"></i> <strong>27×19 cm</strong></span>
+                        <span class="cut-info"><i class="fas fa-cut"></i> Corte: <strong>26×18 cm</strong></span>
                     </div>
                     <div>
                         <button class="btn btn-primary" id="downloadBtn" disabled>
@@ -992,7 +1039,6 @@
             </div>
         </div>
 
-        <!-- ===== INFO ===== -->
         <div style="margin-top: 25px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
             <div class="card">
                 <h2 style="font-size: 1rem;"><i class="fas fa-info-circle"></i> Como Usar</h2>
@@ -1000,25 +1046,25 @@
                     <li>Selecione até <strong>200 fotos</strong> de uma só vez</li>
                     <li>Formatos: <strong>HEIC, HEIF, JPG, PNG, WEBP, BMP, GIF, TIFF</strong></li>
                     <li>Clique em <strong>"Processar"</strong> para organizar</li>
-                    <li>Cada foto será ajustada para <strong>26 × 18 cm</strong></li>
+                    <li>A foto terá <strong>27×19 cm</strong> com sangria</li>
+                    <li>A <strong>linha de corte</strong> será 26×18 cm (em vermelho)</li>
                     <li>Clique em <strong>"Baixar PDF"</strong> para salvar</li>
                 </ol>
             </div>
             <div class="card">
                 <h2 style="font-size: 1rem;"><i class="fas fa-ruler-combined"></i> Especificações</h2>
                 <ul style="color: #94a3b8; line-height: 2; list-style: none; padding: 0; font-size: 0.85rem;">
-                    <li>📐 <strong>Foto:</strong> 26 × 18 cm (Largura × Altura)</li>
+                    <li>📐 <strong>Sangria:</strong> 27 × 19 cm</li>
+                    <li>✂️ <strong>Linha de Corte:</strong> 26 × 18 cm</li>
                     <li>📄 <strong>Página:</strong> A4 Vertical (210 × 297 mm)</li>
-                    <li>✂️ <strong>Marcas:</strong> Cruzetas nos 4 cantos</li>
-                    <li>📏 <strong>Sangria:</strong> 3 mm</li>
+                    <li>📏 <strong>Sangria:</strong> 0,5 cm em cada lado</li>
                     <li>📦 <strong>Máximo:</strong> 200 fotos</li>
                 </ul>
             </div>
         </div>
 
-        <!-- ===== FOOTER ===== -->
         <footer>
-            <p>PB-CROMA PRO &copy; 2024 - Editor de Fotos 26×18cm com Marcas de Corte</p>
+            <p>PB-CROMA PRO &copy; 2024 - Editor de Fotos com Sangria 27×19cm | Corte 26×18cm</p>
             <div class="footer-links">
                 <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
                 <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
@@ -1027,10 +1073,8 @@
         </footer>
     </div>
 
-    <!-- ===== TOAST ===== -->
     <div id="toast" class="toast"></div>
 
-    <!-- ===== SCRIPT ===== -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // ============ ESTADO ============
@@ -1040,9 +1084,12 @@
                 totalPages: 0,
                 maxPhotos: 200,
                 photosPerPage: 1,
-                // TAMANHO DA FOTO: 26cm LARGURA x 18cm ALTURA
-                photoWidth: 260, // mm
-                photoHeight: 180, // mm
+                // TAMANHO COM SANGRIA: 27cm LARGURA x 19cm ALTURA
+                photoWidth: 270, // mm
+                photoHeight: 190, // mm
+                // LINHA DE CORTE: 26cm LARGURA x 18cm ALTURA
+                cutWidth: 260, // mm
+                cutHeight: 180, // mm
                 totalSize: 0,
                 formats: new Set(),
                 isProcessing: false,
@@ -1074,6 +1121,7 @@
             const statFormats = document.getElementById('statFormats');
             const heicWarning = document.getElementById('heicWarning');
             const cutMarks = document.getElementById('cutMarks');
+            const cutLine = document.getElementById('cutLine');
 
             // ============ TOAST ============
             function showToast(message, type = 'info') {
@@ -1246,7 +1294,6 @@
                 let successCount = 0;
                 const CHUNK_SIZE = 10;
 
-                // Processar em lotes de 10 para não travar
                 for (let i = 0; i < files.length; i += CHUNK_SIZE) {
                     const chunk = Array.from(files).slice(i, i + CHUNK_SIZE);
                     
@@ -1315,11 +1362,8 @@
                         }
                     }));
 
-                    // Atualizar UI após cada chunk
                     renderPhotoList();
                     updateCounters();
-                    
-                    // Pequena pausa para não travar a UI
                     await new Promise(r => setTimeout(r, 50));
                 }
 
@@ -1507,28 +1551,28 @@
 
                     const { jsPDF } = window.jspdf;
                     const doc = new jsPDF({
-                        orientation: 'portrait', // VERTICAL
+                        orientation: 'portrait',
                         unit: 'mm',
                         format: 'a4'
                     });
 
                     const margin = 3;
-                    // FOTO: 260mm LARGURA x 180mm ALTURA (26×18cm)
-                    const photoW = 260;
-                    const photoH = 180;
+                    // TAMANHO COM SANGRIA: 270mm x 190mm (27x19cm)
+                    const photoW = 270;
+                    const photoH = 190;
+                    // LINHA DE CORTE: 260mm x 180mm (26x18cm)
+                    const cutW = 260;
+                    const cutH = 180;
                     const pageW = 210;
                     const pageH = 297;
 
-                    // Centralizar a foto na página (a foto é mais larga que a página, então precisamos ajustar)
-                    // Como a foto é 26cm de largura e a página A4 tem 21cm, precisamos redimensionar
-                    // Vamos calcular a escala para caber na página com margem
+                    // Calcular escala para caber na página A4
                     const maxW = pageW - margin * 2;
                     const maxH = pageH - margin * 2;
                     
                     let finalW = photoW;
                     let finalH = photoH;
                     
-                    // Calcular escala para caber na página
                     const scaleW = maxW / photoW;
                     const scaleH = maxH / photoH;
                     const scale = Math.min(scaleW, scaleH);
@@ -1536,8 +1580,15 @@
                     finalW = photoW * scale;
                     finalH = photoH * scale;
 
+                    // Posição da foto com sangria
                     const x = (pageW - finalW) / 2;
                     const y = (pageH - finalH) / 2;
+
+                    // Tamanho da linha de corte na escala
+                    const cutFinalW = cutW * scale;
+                    const cutFinalH = cutH * scale;
+                    const cutX = (pageW - cutFinalW) / 2;
+                    const cutY = (pageH - cutFinalH) / 2;
 
                     const totalPages = state.photos.length;
 
@@ -1555,51 +1606,60 @@
                                 doc.rotate(rotation, { origin: [x + finalW/2, y + finalH/2] });
                             }
                             
+                            // Adicionar imagem com sangria (27x19cm)
                             doc.addImage(photo.url, 'JPEG', x, y, finalW, finalH);
                             
                             if (rotation !== 0) {
                                 doc.rotate(-rotation, { origin: [x + finalW/2, y + finalH/2] });
                             }
 
-                            // MARCAS DE REGISTRO/CORTE
-                            const markSize = 10;
-                            const markOffset = 3;
+                            // ===== LINHA DE CORTE (26x18cm) - VERMELHA =====
+                            doc.setDrawColor(255, 0, 0); // Vermelho
+                            doc.setLineWidth(0.3);
+                            doc.setLineDashPattern([], 0);
+                            doc.rect(cutX, cutY, cutFinalW, cutFinalH);
+
+                            // ===== MARCAS DE REGISTRO/CORTE =====
+                            const markSize = 8;
+                            const markOffset = 2;
 
                             doc.setDrawColor(0);
-                            doc.setLineWidth(0.4);
+                            doc.setLineWidth(0.3);
 
                             function drawCross(cx, cy, size) {
                                 doc.line(cx - size/2, cy, cx + size/2, cy);
                                 doc.line(cx, cy - size/2, cx, cy + size/2);
                             }
 
-                            const corners = [
-                                { x: x - markOffset, y: y - markOffset },
-                                { x: x + finalW + markOffset, y: y - markOffset },
-                                { x: x - markOffset, y: y + finalH + markOffset },
-                                { x: x + finalW + markOffset, y: y + finalH + markOffset }
+                            // Marcas nos cantos da linha de corte
+                            const cutCorners = [
+                                { x: cutX - markOffset, y: cutY - markOffset },
+                                { x: cutX + cutFinalW + markOffset, y: cutY - markOffset },
+                                { x: cutX - markOffset, y: cutY + cutFinalH + markOffset },
+                                { x: cutX + cutFinalW + markOffset, y: cutY + cutFinalH + markOffset }
                             ];
 
-                            corners.forEach(corner => {
+                            cutCorners.forEach(corner => {
                                 drawCross(corner.x, corner.y, markSize);
                             });
 
-                            // Sangria
+                            // ===== LINHA DE SANGRIA (27x19cm) - CINZA PONTILHADA =====
                             doc.setDrawColor(128, 128, 128);
                             doc.setLineWidth(0.2);
                             doc.setLineDashPattern([2, 2], 0);
-                            doc.rect(x - 3, y - 3, finalW + 6, finalH + 6);
+                            doc.rect(x, y, finalW, finalH);
                             doc.setLineDashPattern([], 0);
 
-                            // Info
+                            // Informações da página
                             doc.setFontSize(6);
                             doc.setTextColor(150);
                             doc.text(`PB-CROMA PRO - ${p + 1}/${totalPages}`, margin + 2, margin + 4);
-                            doc.text(`26×18cm`, margin + 2, margin + 8);
+                            doc.text(`Sangria: 27x19cm | Corte: 26x18cm`, margin + 2, margin + 8);
+                            doc.text(`Foto: ${photo.name}`, margin + 2, margin + 12);
                         }
                     }
 
-                    doc.save('fotos-26x18cm-vertical.pdf');
+                    doc.save('fotos-27x19cm-sangria-26x18cm-corte.pdf');
                     showToast('PDF gerado com sucesso!', 'success');
 
                 } catch (error) {
@@ -1661,7 +1721,8 @@
             clearPreview();
 
             console.log('PB-CROMA PRO inicializado!');
-            console.log(`- Fotos: 26 × 18 cm (Largura × Altura)`);
+            console.log(`- Sangria: 27 × 19 cm`);
+            console.log(`- Linha de Corte: 26 × 18 cm`);
             console.log(`- Máximo: ${state.maxPhotos} fotos`);
             console.log(`- Formato: A4 Retrato (Vertical)`);
             console.log(`- Upload: Chunk de 10 fotos`);
