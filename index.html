@@ -2,148 +2,98 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PB-CROMA PRO - 19x28cm VERTICAL SEM LINHA</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <style>
-        *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif}
-        body{background:linear-gradient(135deg,#0f172a,#1e293b);color:#e2e8f0;min-height:100vh}
-        .container{max-width:1600px;margin:0 auto;padding:20px}
-        header{display:flex;justify-content:space-between;align-items:center;padding:20px 30px;background:rgba(30,41,59,.8);backdrop-filter:blur(10px);border-radius:12px;border:1px solid rgba(255,255,255,.1);margin-bottom:30px;flex-wrap:wrap;gap:15px}
-        .logo{width:60px;height:60px;background:linear-gradient(135deg,#3a0ca3,#4361ee,#4cc9f0);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:bold;color:white}
-        .logo-text h1{font-size:2rem;background:linear-gradient(to right,#4cc9f0,#4361ee);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-        .header-info{display:flex;gap:10px;flex-wrap:wrap}
-        .badge{background:rgba(76,201,240,.15);border:1px solid rgba(76,201,240,.3);padding:6px 12px;border-radius:20px;font-size:.75rem;color:#4cc9f0}
-        .badge.vertical{background:rgba(16,185,129,.15);border-color:rgba(16,185,129,.3);color:#6ee7b7}
-        .main-grid{display:grid;grid-template-columns:1fr 2fr;gap:30px}
-        @media(max-width:1024px){.main-grid{grid-template-columns:1fr}}
-        .card{background:rgba(30,41,59,.7);backdrop-filter:blur(10px);padding:25px;border-radius:12px;border:1px solid rgba(255,255,255,.1)}
-        .card h2{color:#4cc9f0;margin-bottom:15px;font-size:1.2rem;display:flex;align-items:center;gap:10px}
-        .upload-area{border:2px dashed #475569;border-radius:12px;padding:30px 20px;text-align:center;cursor:pointer;background:rgba(15,23,42,.5);margin-bottom:15px}
-        .upload-area:hover{border-color:#4cc9f0}
-        .btn{padding:10px 20px;border:none;border-radius:8px;font-weight:600;cursor:pointer}
-        .btn-primary{background:linear-gradient(135deg,#3a0ca3,#4361ee);color:white}
-        .btn-success{background:linear-gradient(135deg,#10b981,#059669);color:white}
-        .btn-danger{background:linear-gradient(135deg,#ef4444,#dc2626);color:white}
-        .btn:disabled{opacity:.5;cursor:not-allowed}
-        .hidden{display:none!important}
-        .photo-counter{background:linear-gradient(135deg,#3a0ca3,#4361ee);color:white;padding:3px 10px;border-radius:20px;font-size:.75rem;margin-left:8px}
-        .photo-list{max-height:200px;overflow-y:auto;margin:10px 0}
-        .photo-item{display:flex;align-items:center;padding:8px;border-bottom:1px solid #334155;gap:10px}
-        .photo-thumb{width:40px;height:40px;object-fit:cover;border-radius:6px;background:#1a1a2e}
-        .photo-info{flex:1;min-width:0}
-        .progress-bar{width:100%;height:4px;background:rgba(255,255,255,.1);border-radius:2px;margin:8px 0;display:none}
-        .progress-bar.active{display:block}
-        .progress-fill{height:100%;background:linear-gradient(90deg,#3a0ca3,#4cc9f0);width:0%}
-        .preview-toolbar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:15px}
-        .preview-toolbar .page-controls{display:flex;gap:8px;align-items:center}
-        .a4-page-container{background:#1a1a2e;padding:20px;border-radius:12px;display:flex;justify-content:center;align-items:center;min-height:600px}
-        .a4-page{background:white;width:100%;max-width:380px;aspect-ratio:210/297;position:relative;box-shadow:0 10px 40px rgba(0,0,0,.5);border-radius:4px;overflow:hidden}
-        .photo-grid{width:100%;height:100%;padding:0;display:flex;justify-content:center;align-items:center}
-        .photo-slot{width:100%;height:100%;background:#f1f5f9;display:flex;align-items:center;justify-content:center;overflow:hidden}
-        .photo-slot img{width:100%;height:100%;object-fit:cover}
-        .photo-slot .photo-placeholder{color:#94a3b8;text-align:center;padding:20px}
-        .status-bar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-top:12px;padding:12px 15px;background:rgba(15,23,42,.5);border-radius:8px}
-        .toast{position:fixed;bottom:20px;right:20px;padding:12px 20px;border-radius:10px;color:white;transform:translateY(100px);opacity:0;transition:all .3s ease;z-index:1000}
-        .toast.show{transform:translateY(0);opacity:1}
-        .toast.success{background:#10b981} .toast.error{background:#ef4444}
-        .spec-box{background:rgba(15,23,42,.5);border-radius:8px;padding:12px 15px;margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:.8rem}
-    </style>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PB-CROMA PRO - 19x26,5 FINAL SEM LINHAS</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Tahoma,sans-serif}
+body{background:linear-gradient(135deg,#0f172a,#1e293b);color:#e2e8f0;min-height:100vh}
+.container{max-width:1600px;margin:0 auto;padding:20px}
+header{display:flex;justify-content:space-between;align-items:center;padding:20px 30px;background:rgba(30,41,59,.8);border-radius:12px;border:1px solid rgba(255,255,255,.1);margin-bottom:30px;flex-wrap:wrap;gap:15px}
+.logo{width:60px;height:60px;background:linear-gradient(135deg,#3a0ca3,#4361ee,#4cc9f0);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:bold;color:#fff}
+.badge{background:rgba(76,201,240,.15);border:1px solid rgba(76,201,240,.3);padding:6px 12px;border-radius:20px;font-size:.75rem;color:#4cc9f0}
+.badge.ok{background:rgba(16,185,129,.15);border-color:rgba(16,185,129,.3);color:#6ee7b7}
+.main-grid{display:grid;grid-template-columns:1fr 2fr;gap:30px}
+@media(max-width:1024px){.main-grid{grid-template-columns:1fr}}
+.card{background:rgba(30,41,59,.7);padding:25px;border-radius:12px;border:1px solid rgba(255,255,255,.1)}
+.upload-area{border:2px dashed #475569;border-radius:12px;padding:30px 20px;text-align:center;cursor:pointer;background:rgba(15,23,42,.5);margin-bottom:15px}
+.upload-area:hover{border-color:#4cc9f0}
+.btn{padding:10px 20px;border:none;border-radius:8px;font-weight:600;cursor:pointer}
+.btn-primary{background:linear-gradient(135deg,#3a0ca3,#4361ee);color:#fff}
+.btn-success{background:linear-gradient(135deg,#10b981,#059669);color:#fff}
+.btn-danger{background:linear-gradient(135deg,#ef4444,#dc2626);color:#fff}
+.btn:disabled{opacity:.5}
+.hidden{display:none}
+.photo-counter{background:linear-gradient(135deg,#3a0ca3,#4361ee);color:#fff;padding:3px 10px;border-radius:20px;font-size:.75rem;margin-left:8px}
+.photo-list{max-height:200px;overflow-y:auto;margin:10px 0}
+.photo-item{display:flex;align-items:center;padding:8px;border-bottom:1px solid #334155;gap:10px}
+.photo-thumb{width:40px;height:40px;object-fit:cover;border-radius:6px;background:#1a1a2e}
+.progress-bar{width:100%;height:4px;background:rgba(255,255,255,.1);border-radius:2px;margin:8px 0;display:none}
+.progress-fill{height:100%;background:linear-gradient(90deg,#3a0ca3,#4cc9f0);width:0%}
+.progress-bar.active{display:block}
+.a4-page-container{background:#1a1a2e;padding:20px;border-radius:12px;display:flex;justify-content:center;align-items:center;min-height:540px}
+.a4-page{background:white;width:100%;max-width:360px;aspect-ratio:190/265;position:relative;box-shadow:0 10px 40px rgba(0,0,0,.5);overflow:hidden}
+.photo-grid{width:100%;height:100%}
+.photo-slot{width:100%;height:100%;background:#f1f5f9;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.photo-slot img{width:100%;height:100%;object-fit:cover}
+.toast{position:fixed;bottom:20px;right:20px;padding:12px 20px;border-radius:10px;color:#fff;transform:translateY(100px);opacity:0;transition:.3s;z-index:1000}
+.toast.show{transform:translateY(0);opacity:1}
+.toast.success{background:#10b981}
+</style>
 </head>
 <body>
 <div class="container">
 <header>
-    <div style="display:flex;align-items:center;gap:15px"><div class="logo">PB</div><div class="logo-text"><h1>PB-CROMA PRO</h1><p>19x28cm VERTICAL - SEM LINHA</p></div></div>
-    <div class="header-info"><span class="badge vertical">19×28 VERTICAL</span><span class="badge">Topo menor - Lateral maior</span><span class="badge">200 Fotos</span></div>
+<div style="display:flex;align-items:center;gap:15px"><div class="logo">PB</div><div><h1 style="font-size:1.8rem;background:linear-gradient(to right,#4cc9f0,#4361ee);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">PB-CROMA PRO</h1><p style="color:#94a3b8;font-size:.85rem">19 x 26,5cm - FOTO LIMPA - TODAS AS LINHAS REMOVIDAS</p></div></div>
+<div style="display:flex;gap:8px;flex-wrap:wrap"><span class="badge">19 x 26,5 cm</span><span class="badge ok">✓ SEM LINHA NENHUMA</span><span class="badge">200 Fotos</span></div>
 </header>
 <div class="main-grid">
 <div class="card">
-    <h2><i class="fas fa-upload"></i> Importar Fotos <span class="photo-counter" id="photoCounter">0 / 200</span></h2>
-    <div class="upload-area" id="uploadArea"><i class="fas fa-cloud-upload-alt" style="font-size:36px;color:#4cc9f0"></i><p><strong>Arraste suas fotos</strong></p><input type="file" id="fileInput" accept="image/*" multiple class="hidden"><button class="btn btn-primary" id="browseBtn">Selecionar</button></div>
-    <div class="spec-box"><div>📐 Foto: <strong>19 × 28 cm</strong></div><div>📄 Folha: <strong>A4 Retrato</strong></div><div>📍 Topo: <strong>19cm menor</strong></div><div>📍 Lateral: <strong>28cm maior</strong></div></div>
-    <div class="progress-bar" id="progressBar"><div class="progress-fill" id="progressFill"></div></div>
-    <div class="photo-list" id="photoList"><p style="text-align:center;color:#64748b;padding:15px;">Nenhuma foto</p></div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px"><button class="btn btn-danger" id="clearBtn">Limpar</button><button class="btn btn-success" id="processBtn" disabled>Processar</button></div>
+<h2 style="color:#4cc9f0;margin-bottom:12px"><i class="fas fa-upload"></i> Fotos <span class="photo-counter" id="photoCounter">0 / 200</span></h2>
+<div class="upload-area" id="uploadArea"><i class="fas fa-cloud-upload-alt" style="font-size:36px;color:#4cc9f0;display:block;margin-bottom:8px"></i><p><strong>Arraste suas fotos aqui</strong></p><input type="file" id="fileInput" accept="image/*" multiple class="hidden"><button class="btn btn-primary" id="browseBtn">Selecionar</button><p style="font-size:.7rem;color:#64748b;margin-top:8px">Sem linha de corte no preview e no PDF</p></div>
+<div style="background:rgba(15,23,42,.5);border-radius:8px;padding:10px;display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:.78rem;color:#94a3b8">
+<div>📐 Tamanho: <b style="color:#fff">19 x 26,5</b></div><div>✂ Linhas: <b style="color:#34d399">REMOVIDAS</b></div>
+<div>📄 Folha: <b style="color:#fff">Sulfite A4</b></div><div>🖼 Modo: <b style="color:#fff">Cover 100%</b></div>
+</div>
+<div class="progress-bar" id="progressBar"><div class="progress-fill" id="progressFill"></div></div>
+<div class="photo-list" id="photoList"><p style="text-align:center;color:#64748b;padding:15px">Nenhuma foto</p></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px"><button class="btn btn-danger" id="clearBtn">Limpar</button><button class="btn btn-success" id="processBtn" disabled>Processar</button></div>
 </div>
 <div class="card">
-    <div class="preview-toolbar"><h2 style="margin:0;font-size:1.1rem"><i class="fas fa-eye"></i> Pré-visualização - SEM LINHA</h2><div class="page-controls"><button id="prevPageBtn">◀</button><span id="pageIndicator">Página 1 de 1</span><button id="nextPageBtn">▶</button></div></div>
-    <div class="a4-page-container"><div class="a4-page" id="a4Page"><div class="photo-grid"><div class="photo-slot" id="photoSlot"><div class="photo-placeholder"><i class="fas fa-image" style="font-size:2.5rem;display:block;margin-bottom:8px;color:#cbd5e1"></i>19×28cm Vertical<br><span style="font-size:.7rem">Topo menor / Lateral maior</span></div></div></div></div></div>
-    <div class="status-bar"><div><strong id="totalPhotos">0</strong> fotos | <strong id="totalPages">0</strong> páginas | <strong>19×28 VERTICAL</strong> - SEM LINHA VERMELHA</div><button class="btn btn-primary" id="downloadBtn" disabled>Baixar PDF Limpo</button></div>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px"><h2 style="color:#4cc9f0;margin:0;font-size:1.05rem"><i class="fas fa-eye"></i> Preview 19x26,5 SEM LINHAS</h2><div><button id="prevPageBtn" class="btn" style="background:#334155;color:#fff;padding:6px 12px" disabled>◀</button><span id="pageIndicator" style="margin:0 8px;color:#94a3b8;font-size:.8rem">Página 1</span><button id="nextPageBtn" class="btn" style="background:#334155;color:#fff;padding:6px 12px" disabled>▶</button></div></div>
+<div class="a4-page-container"><div class="a4-page"><div class="photo-grid"><div class="photo-slot" id="photoSlot"><div style="text-align:center;color:#94a3b8"><i class="fas fa-image" style="font-size:2.2rem;display:block;margin-bottom:6px;color:#cbd5e1"></i>19 x 26,5 cm<br><small style="color:#6ee7b7">✓ Nenhuma linha</small></div></div></div><div id="pageLabel" style="position:absolute;top:6px;right:10px;background:rgba(0,0,0,.7);color:#fff;padding:2px 8px;border-radius:4px;font-size:.65rem">Página 1</div></div></div>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px;padding:12px;background:rgba(15,23,42,.5);border-radius:8px;flex-wrap:wrap;gap:8px"><div style="display:flex;gap:12px;color:#94a3b8;font-size:.8rem"><span>📸 <b id="totalPhotos" style="color:#fff">0</b></span><span>📄 <b id="totalPages" style="color:#fff">0</b></span><span style="color:#6ee7b7">✓ LIMPO</span></div><button class="btn btn-primary" id="downloadBtn" disabled><i class="fas fa-download"></i> Baixar PDF Limpo</button></div>
 </div>
 </div>
 </div>
 <div id="toast" class="toast"></div>
 <script>
-document.addEventListener('DOMContentLoaded', function(){
-    const state={photos:[],currentPage:0,totalPages:0,maxPhotos:200,totalSize:0};
-    const uploadArea=document.getElementById('uploadArea'),fileInput=document.getElementById('fileInput'),browseBtn=document.getElementById('browseBtn'),photoList=document.getElementById('photoList'),photoSlot=document.getElementById('photoSlot'),processBtn=document.getElementById('processBtn'),clearBtn=document.getElementById('clearBtn'),downloadBtn=document.getElementById('downloadBtn'),prevPageBtn=document.getElementById('prevPageBtn'),nextPageBtn=document.getElementById('nextPageBtn'),pageIndicator=document.getElementById('pageIndicator'),photoCounter=document.getElementById('photoCounter'),totalPhotos=document.getElementById('totalPhotos'),totalPagesEl=document.getElementById('totalPages'),toast=document.getElementById('toast'),progressBar=document.getElementById('progressBar'),progressFill=document.getElementById('progressFill');
-
-    function showToast(m,t='success'){toast.textContent=m;toast.className='toast '+t+' show';setTimeout(()=>toast.classList.remove('show'),3000)}
-    function formatFileSize(b){if(b===0)return'0';const k=1024;return (b/k<1024)?(b/k).toFixed(1)+' KB':(b/k/k).toFixed(1)+' MB'}
-    function isImageFile(f){return f.type.startsWith('image/')}
-
-    function updateCounters(){photoCounter.textContent=`${state.photos.length} / ${state.maxPhotos}`;totalPhotos.textContent=state.photos.length;totalPagesEl.textContent=state.totalPages||0;processBtn.disabled=state.photos.length===0;downloadBtn.disabled=state.totalPages===0}
-
-    async function addPhotos(files){
-        files=Array.from(files).slice(0,state.maxPhotos-state.photos.length);
-        progressBar.classList.add('active');
-        for(let i=0;i<files.length;i++){
-            const file=files[i];
-            if(!isImageFile(file))continue;
-            const url=await new Promise(r=>{const rd=new FileReader();rd.onload=e=>r(e.target.result);rd.readAsDataURL(file)});
-            state.photos.push({name:file.name,size:file.size,url:url,rotation:0});
-            progressFill.style.width=((i+1)/files.length*100)+'%';
-            renderList();updateCounters();
-        }
-        progressBar.classList.remove('active');showToast(`${files.length} fotos adicionadas`);
-    }
-    function renderList(){
-        if(state.photos.length===0){photoList.innerHTML='<p style="text-align:center;color:#64748b;padding:15px;">Nenhuma foto</p>';return}
-        photoList.innerHTML='';state.photos.forEach((p,i)=>{const d=document.createElement('div');d.className='photo-item';d.innerHTML=`<img src="${p.url}" class="photo-thumb"><div style="flex:1;min-width:0"><div style="font-size:.8rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${p.name}</div><div style="font-size:.7rem;color:#94a3b8">${formatFileSize(p.size)}</div></div><button onclick="window.removePhoto(${i})" style="padding:4px 8px">X</button>`;photoList.appendChild(d)});
-    }
-    window.removePhoto=(i)=>{state.photos.splice(i,1);renderList();updateCounters();renderPreview()}
-    function renderPreview(){
-        if(state.photos.length===0||state.totalPages===0){photoSlot.innerHTML='<div class="photo-placeholder"><i class="fas fa-image" style="font-size:2.5rem;display:block;margin-bottom:8px;color:#cbd5e1"></i>19×28cm Vertical</div>';return}
-        const photo=state.photos[state.currentPage];
-        if(photo){photoSlot.innerHTML=`<img src="${photo.url}" style="width:100%;height:100%;object-fit:cover;transform:rotate(${photo.rotation||0}deg)">`}
-        pageIndicator.textContent=`Página ${state.currentPage+1} de ${state.totalPages}`;
-    }
-    function processPhotos(){if(state.photos.length===0)return;state.totalPages=state.photos.length;state.currentPage=0;renderPreview();updateCounters();downloadBtn.disabled=false;showToast(`${state.photos.length} fotos prontas - 19x28 vertical`)}
-
-    async function generatePDF(){
-        if(state.photos.length===0)return;
-        downloadBtn.disabled=true;downloadBtn.textContent='Gerando...';
-        try{
-            const {jsPDF}=window.jspdf;
-            const doc=new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
-            const pageW=210,pageH=297;
-            const photoW=190,photoH=280; // 19cm topo menor x 28cm lateral maior - VERTICAL
-            const x=(pageW-photoW)/2;
-            const y=(pageH-photoH)/2;
-            for(let p=0;p<state.photos.length;p++){
-                if(p>0)doc.addPage('portrait','a4');
-                const photo=state.photos[p];
-                // SEM LINHA VERMELHA - SÓ A FOTO
-                doc.addImage(photo.url,'JPEG',x,y,photoW,photoH);
-            }
-            doc.save('fotos-19x28-vertical-sem-linha.pdf');
-            showToast('PDF sem linha gerado!');
-        }catch(e){showToast('Erro: '+e.message,'error')}
-        finally{downloadBtn.disabled=false;downloadBtn.textContent='Baixar PDF Limpo'}
-    }
-
-    browseBtn.addEventListener('click',()=>fileInput.click());
-    fileInput.addEventListener('change',e=>{addPhotos(e.target.files);e.target.value=''});
-    uploadArea.addEventListener('dragover',e=>{e.preventDefault();uploadArea.style.borderColor='#4cc9f0'});
-    uploadArea.addEventListener('drop',e=>{e.preventDefault();addPhotos(e.dataTransfer.files)});
-    uploadArea.addEventListener('click',()=>fileInput.click());
-    processBtn.addEventListener('click',processPhotos);
-    clearBtn.addEventListener('click',()=>{state.photos=[];state.totalPages=0;renderList();updateCounters();renderPreview()});
-    downloadBtn.addEventListener('click',generatePDF);
-    prevPageBtn.addEventListener('click',()=>{if(state.currentPage>0){state.currentPage--;renderPreview()}});
-    nextPageBtn.addEventListener('click',()=>{if(state.currentPage<state.totalPages-1){state.currentPage++;renderPreview()}});
+document.addEventListener('DOMContentLoaded',()=>{
+const state={photos:[],currentPage:0,totalPages:0,maxPhotos:200};
+const uploadArea=document.getElementById('uploadArea'),fileInput=document.getElementById('fileInput'),browseBtn=document.getElementById('browseBtn'),photoList=document.getElementById('photoList'),photoSlot=document.getElementById('photoSlot'),processBtn=document.getElementById('processBtn'),clearBtn=document.getElementById('clearBtn'),downloadBtn=document.getElementById('downloadBtn'),prevPageBtn=document.getElementById('prevPageBtn'),nextPageBtn=document.getElementById('nextPageBtn'),pageIndicator=document.getElementById('pageIndicator'),pageLabel=document.getElementById('pageLabel'),photoCounter=document.getElementById('photoCounter'),totalPhotos=document.getElementById('totalPhotos'),totalPagesEl=document.getElementById('totalPages'),toast=document.getElementById('toast'),progressBar=document.getElementById('progressBar'),progressFill=document.getElementById('progressFill');
+function showToast(m){toast.textContent=m;toast.className='toast success show';setTimeout(()=>toast.classList.remove('show'),3000);}
+function isImg(f){return f.type.startsWith('image/')||['.jpg','.jpeg','.png','.webp','.bmp','.heic','.heif'].some(e=>f.name.toLowerCase().endsWith(e));}
+function loadImg(file){return new Promise((res,rej)=>{const r=new FileReader();r.onload=e=>{const im=new Image();im.onload=()=>res({url:e.target.result});im.onerror=rej;im.src=e.target.result;};r.readAsDataURL(file);});}
+function updateCounters(){photoCounter.textContent=`${state.photos.length} / ${state.maxPhotos}`;totalPhotos.textContent=state.photos.length;totalPagesEl.textContent=state.totalPages||0;processBtn.disabled=state.photos.length===0;downloadBtn.disabled=state.photos.length===0||state.totalPages===0;const t=state.totalPages||0;prevPageBtn.disabled=state.currentPage===0||t===0;nextPageBtn.disabled=state.currentPage>=t-1||t===0;pageIndicator.textContent=t>0?`Página ${state.currentPage+1} de ${t}`:'Página 1';pageLabel.textContent=t>0?`Página ${state.currentPage+1}`:'Página 1';}
+function renderList(){if(state.photos.length===0){photoList.innerHTML='<p style="text-align:center;color:#64748b;padding:15px">Nenhuma foto</p>';return;}photoList.innerHTML='';state.photos.forEach((p,i)=>{const d=document.createElement('div');d.className='photo-item';d.innerHTML=`<img src="${p.url}" class="photo-thumb"><div style="flex:1;min-width:0;font-size:.8rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${p.name}</div><button onclick="window.removePhoto(${i})" style="background:#334155;border:none;color:#fff;padding:4px 8px;border-radius:4px;cursor:pointer">X</button>`;photoList.appendChild(d);});}
+function renderPreview(){if(state.photos.length===0||state.totalPages===0){photoSlot.innerHTML='<div style="text-align:center;color:#94a3b8"><i class="fas fa-image" style="font-size:2rem;display:block;margin-bottom:6px"></i>19 x 26,5<br><small>Sem linhas</small></div>';return;}const ph=state.photos[state.currentPage];photoSlot.innerHTML=`<img src="${ph.url}" style="width:100%;height:100%;object-fit:cover;transform:rotate(${ph.rotation||0}deg)">`;updateCounters();}
+async function addPhotos(files){files=Array.from(files).slice(0,state.maxPhotos-state.photos.length);progressBar.classList.add('active');let done=0;for(let i=0;i<files.length;i+=10){const chunk=Array.from(files).slice(i,i+10);await Promise.all(chunk.map(async f=>{if(!isImg(f)){done++;progressFill.style.width=(done/files.length*100)+'%';return;}try{const r=await loadImg(f);state.photos.push({name:f.name,url:r.url,rotation:0});done++;progressFill.style.width=(done/files.length*100)+'%';}catch(e){done++;progressFill.style.width=(done/files.length*100)+'%';}}));renderList();updateCounters();}progressBar.classList.remove('active');progressFill.style.width='0%';showToast(`${state.photos.length} fotos carregadas - SEM LINHAS`);}
+window.removePhoto=(i)=>{state.photos.splice(i,1);renderList();if(state.photos.length===0){state.totalPages=0;state.currentPage=0;photoSlot.innerHTML='<div style="text-align:center;color:#94a3b8">19 x 26,5<br><small>Sem linhas</small></div>';}else{if(state.currentPage>=state.photos.length)state.currentPage=state.photos.length-1;renderPreview();}updateCounters();};
+function processPhotos(){if(state.photos.length===0)return;state.totalPages=state.photos.length;state.currentPage=0;renderPreview();updateCounters();showToast(`${state.photos.length} páginas 19x26,5 limpas`);}
+async function genPDF(){downloadBtn.disabled=true;downloadBtn.textContent='Gerando...';try{const {jsPDF}=window.jspdf;const doc=new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});const pageW=210,pageH=297,photoW=190,photoH=265,x=(pageW-photoW)/2,y=(pageH-photoH)/2;for(let p=0;p<state.photos.length;p++){if(p>0)doc.addPage();const ph=state.photos[p];if(ph.rotation)doc.rotate(ph.rotation,{origin:[x+photoW/2,y+photoH/2]});doc.addImage(ph.url,'JPEG',x,y,photoW,photoH);if(ph.rotation)doc.rotate(-ph.rotation,{origin:[x+photoW/2,y+photoH/2]});}doc.save('19x26.5cm-SEM-LINHA-NENHUMA.pdf');showToast('PDF sem nenhuma linha gerado!');}catch(e){showToast('Erro: '+e.message);}finally{downloadBtn.disabled=false;downloadBtn.textContent='Baixar PDF Limpo';}}
+browseBtn.addEventListener('click',()=>fileInput.click());
+fileInput.addEventListener('change',function(){if(this.files.length>0)addPhotos(this.files);this.value='';});
+uploadArea.addEventListener('dragover',e=>{e.preventDefault();uploadArea.style.borderColor='#4cc9f0';});
+uploadArea.addEventListener('dragleave',()=>uploadArea.style.borderColor='#475569');
+uploadArea.addEventListener('drop',e=>{e.preventDefault();uploadArea.style.borderColor='#475569';if(e.dataTransfer.files.length>0)addPhotos(e.dataTransfer.files);});
+uploadArea.addEventListener('click',()=>fileInput.click());
+processBtn.addEventListener('click',processPhotos);
+clearBtn.addEventListener('click',()=>{if(confirm('Limpar tudo?')){state.photos=[];state.totalPages=0;state.currentPage=0;renderList();updateCounters();photoSlot.innerHTML='<div style="text-align:center;color:#94a3b8">19 x 26,5<br><small>Sem linhas</small></div>';}});
+downloadBtn.addEventListener('click',genPDF);
+prevPageBtn.addEventListener('click',()=>{if(state.currentPage>0){state.currentPage--;renderPreview();}});
+nextPageBtn.addEventListener('click',()=>{if(state.currentPage<state.totalPages-1){state.currentPage++;renderPreview();}});
+updateCounters();
 });
 </script>
 </body>
